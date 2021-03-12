@@ -15,7 +15,7 @@ class ManaRepositoryImpl: ManaRepository {
     )
 
     //todo get from database
-    override fun getMana(): List<ManaCategory> {
+    override fun getManaCategories(): List<ManaCategory> {
         return defautManaCategories
     }
 }

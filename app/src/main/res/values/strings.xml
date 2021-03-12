@@ -2,4 +2,7 @@
     <string name="app_name">Money Mana</string>
     <string name="camera_button_text">сделать снимок</string>
     <string name="camera_access_denyded_text">Для полноценной работы приложения необходимо разрешение на использовании камеры</string>
+    <string name="add_category_name">Введите название категории</string>
+    <string name="set_limit">Установите лимит</string>
+    <string name="save">Сохранить</string>
 </resources>

@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.friendroids.moneymana.domain.repository.ManaRepository
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ManaViewModel(private val manaRepository: ManaRepository) : ViewModel() {
 
@@ -16,12 +18,14 @@ class ManaViewModel(private val manaRepository: ManaRepository) : ViewModel() {
     fun updateManaProgress(manaCategory: ManaCategory) {
         viewModelScope.launch {
             _manaCategories.value = _manaCategories.value?.map {
-                if (it.title == manaCategory.title) it.copy(sumRemained = manaCategory.sumRemained) else it
+                withContext(Dispatchers.IO) {
+                    if (it.title == manaCategory.title) it.copy(sumRemained = manaCategory.sumRemained) else it
+                }
             }
         }
     }
 
     fun getUserManaState() {
-        _manaCategories.value = manaRepository.getMana()
+        _manaCategories.value = manaRepository.getManaCategories()
     }
 }
