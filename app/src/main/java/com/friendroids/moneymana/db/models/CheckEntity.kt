@@ -12,8 +12,8 @@ import java.util.*
         tableName = DBContract.Checks.TABLE_NAME,
         indices = [Index(DBContract.Checks.COLUMN_NAME_ID)]
 )
-class CheckEntity (
-        @PrimaryKey(autoGenerate = false)
+class CheckEntity(
+        @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_ID)
         val _id: Int,
 

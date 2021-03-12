@@ -7,11 +7,11 @@ import androidx.room.PrimaryKey
 import com.friendroids.moneymana.db.DBContract
 
 @Entity(
-        tableName = DBContract.Categories.TABLE_NAME,
-        indices = [Index(DBContract.Categories.COLUMN_NAME_ID)]
+    tableName = DBContract.Categories.TABLE_NAME,
+    indices = [Index(DBContract.Categories.COLUMN_NAME_ID)]
 )
-class CategorieEntity (
-    @PrimaryKey(autoGenerate = false)
+class CategorieEntity(
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = DBContract.Categories.COLUMN_NAME_ID)
     val _id: Int,
 

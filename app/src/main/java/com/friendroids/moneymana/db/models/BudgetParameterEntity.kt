@@ -12,7 +12,7 @@ import java.util.*
         indices = [Index(DBContract.BudgetParameters.COLUMN_NAME_ID)]
 )
 class BudgetParameterEntity (
-        @PrimaryKey(autoGenerate = false)
+        @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = DBContract.BudgetParameters.COLUMN_NAME_ID)
         val _id: Int,
 
