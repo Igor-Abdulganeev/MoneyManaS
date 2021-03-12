@@ -8,6 +8,8 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
@@ -24,6 +26,10 @@ class ManaCameraX(
     private var cameraLens = CameraSelector.LENS_FACING_BACK
     private lateinit var imageCapture: ImageCapture
     private lateinit var inputImage: InputImage
+
+    private var _qrCode = MutableLiveData<String>()
+    val qrCode: LiveData<String>
+        get() = _qrCode
 
     fun bindCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
@@ -73,6 +79,7 @@ class ManaCameraX(
                         when (barcode.valueType) {
                             Barcode.TYPE_TEXT -> {
                                 Log.d("ManaCameraX", "ТЕКСТ СКАНА = ${barcode.displayValue}")
+                                _qrCode.value = barcode.displayValue
                             }
                         }
 
