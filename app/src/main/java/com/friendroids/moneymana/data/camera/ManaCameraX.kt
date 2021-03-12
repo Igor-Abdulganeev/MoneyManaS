@@ -1,13 +1,16 @@
 package com.friendroids.moneymana.data.camera
 
+import android.annotation.SuppressLint
 import android.content.Context
-import androidx.camera.core.AspectRatio
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.Preview
+import android.util.Log
+import android.widget.Toast
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.lifecycle.LifecycleOwner
+import com.google.mlkit.vision.barcode.Barcode
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions
+import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
 import java.util.concurrent.Executor
 
@@ -56,4 +59,60 @@ class ManaCameraX(
         )
     }
 
+    private fun scanImage() {
+        val options = BarcodeScannerOptions.Builder()
+            .setBarcodeFormats(
+                Barcode.FORMAT_QR_CODE
+            )
+            .build()
+        val scanner = BarcodeScanning.getClient(options)
+        if (::inputImage.isInitialized) {
+            val result = scanner.process(inputImage)
+                .addOnSuccessListener { barcodes ->
+                    for (barcode in barcodes) {
+                        when (barcode.valueType) {
+                            Barcode.TYPE_TEXT -> {
+                                Log.d("ManaCameraX", "ТЕКСТ СКАНА = ${barcode.displayValue}")
+                            }
+                        }
+
+                    }
+                }
+                .addOnFailureListener {
+                    Log.d("ManaCameraX", " ОШИБКА СКАНА")
+                }
+        }
+    }
+
+    fun scanQRCode() {
+        imageCapture.takePicture(
+            executor,
+            object : ImageCapture.OnImageCapturedCallback() {
+                @SuppressLint("UnsafeExperimentalUsageError")
+                override fun onCaptureSuccess(imageProxy: ImageProxy) {
+                    // super.onCaptureSuccess(image)
+                    Log.d("ManaCameraX", "Фото сделано удачно")
+                    val newImage = imageProxy.image
+                    if (newImage != null) {
+                        inputImage = InputImage.fromMediaImage(
+                            newImage,
+                            imageProxy.imageInfo.rotationDegrees
+                        )
+                        scanImage()
+                        imageProxy.close()
+                    }
+                }
+
+                override fun onError(exception: ImageCaptureException) {
+                    Log.d("ManaCameraX", "Ошибка съемки = ${exception.message}")
+                    Toast.makeText(
+                        context,
+                        "Ошибка съемки = ${exception.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    super.onError(exception)
+                }
+            }
+        )
+    }
 }
