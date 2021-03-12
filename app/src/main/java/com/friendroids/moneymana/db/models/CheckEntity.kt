@@ -18,10 +18,10 @@ class CheckEntity (
         val _id: Int,
 
         @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_CATEGORIE_ID)
-        val categorieId: String,
+        val categorieId: Int,
 
         @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_DATE_CHECK)
-        val dataCheck: Date,
+        val dateCheck: Date,
 
         @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_SUMMA)
         val summa: Double

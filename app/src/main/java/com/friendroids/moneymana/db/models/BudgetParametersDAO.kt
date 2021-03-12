@@ -26,6 +26,6 @@ interface BudgetParametersDAO {
     @Query("SELECT budgetparameters.*, categories.title AS categorietitle, categories.image AS categorieimageid " +
             "FROM budgetparameters, categories " +
             "WHERE budgetparameters.categorieid = categories._id "+
-    "AND budgetparameters.datebudget = :dateBudget")
-    fun getBudgetParametersCByDate(dateBudget: Date): List<BudgetParameterCategorie>
+    "AND (budgetparameters.datebudget between :dateStart and :dateEnd)")
+    fun getBudgetParametersCByDate(dateStart: Date, dateEnd: Date): List<BudgetParameterCategorie>
 }

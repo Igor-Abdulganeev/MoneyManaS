@@ -6,5 +6,5 @@ data class Check (
         val id:Int,
         val dateCheck:Date,
         val categorie: Categorie,
-        val summa:Int
+        val summa:Double
         )
