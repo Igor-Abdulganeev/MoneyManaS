@@ -11,6 +11,8 @@ import com.friendroids.moneymana.databinding.FragmentMainBinding
 import com.friendroids.moneymana.ui.main_screen.adapter.ManaCategoriesAdapter
 import com.friendroids.moneymana.ui.main_screen.viewmodel.ManaViewModel
 import com.friendroids.moneymana.ui.main_screen.viewmodel.ManaViewModelFactory
+import com.friendroids.moneymana.ui.new_category.AddCategoryDialog
+import com.friendroids.moneymana.ui.new_category.AddCategoryDialog.Companion.ADD_CATEGORY_DIALOG_TAG
 
 class MainFragment : Fragment() {
 
@@ -34,6 +36,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
+        initAddCategoryDialog()
         viewModel.getUserManaState()
         viewModel.manaCategories.observe(viewLifecycleOwner, { manaCategoriesAdapter.bindItems(it) })
     }
@@ -48,5 +51,12 @@ class MainFragment : Fragment() {
             viewModel.updateManaProgress(it)
         }
         binding.manaRecyclerView.adapter = manaCategoriesAdapter
+    }
+
+    private fun initAddCategoryDialog() {
+        binding.addCategoryButton.setOnClickListener {
+            val dialog = AddCategoryDialog()
+            dialog.show(childFragmentManager, ADD_CATEGORY_DIALOG_TAG)
+        }
     }
 }

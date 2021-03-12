@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Money Mana</string>
+    <string name="add_category_name">Введите название категории</string>
+    <string name="set_limit">Установите лимит</string>
+    <string name="save">Сохранить</string>
 </resources>
