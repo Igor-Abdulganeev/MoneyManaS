@@ -33,7 +33,7 @@ class CameraFragment : Fragment() {
         executor = ContextCompat.getMainExecutor(requireContext())
         cameraX = ManaCameraX(requireContext(), executor, binding.cameraView, viewLifecycleOwner)
         binding.button.setOnClickListener {
-            // takePhoto(this)
+            cameraX.scanQRCode()
         }
         cameraX.bindCamera()
     }
