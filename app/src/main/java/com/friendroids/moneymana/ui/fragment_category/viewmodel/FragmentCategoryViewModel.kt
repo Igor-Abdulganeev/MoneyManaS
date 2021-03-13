@@ -4,25 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.friendroids.moneymana.R
-import com.friendroids.moneymana.domain.repository.ManaRepository
-import com.friendroids.moneymana.ui.presentation_models.ManaCategory
+import com.friendroids.moneymana.data.repository.ManaFragmentCategoryRepository
+import com.friendroids.moneymana.db.models.CheckEntity
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class FragmentCategoryViewModel(private val manaRepository: ManaRepository) : ViewModel() {
+class FragmentCategoryViewModel(private val manaFragmentCategoryRepository: ManaFragmentCategoryRepository) : ViewModel() {
 
-    private val _manaCategories = MutableLiveData<ManaCategory>()
-    val manaCategories: LiveData<ManaCategory> get() = _manaCategories
+    private var _manaChecks = MutableLiveData<List<CheckEntity>>()
+    val manaChecks: LiveData<List<CheckEntity>> get() = _manaChecks
 
     fun updateManaProgress(categoryId: Int) {
         viewModelScope.launch {
-            _manaCategories.value = ManaCategory(
-                title="Fuel",
-                sumRemained=2500,
-                maxSum = 5000,
-                imageId = R.drawable.food_fork_drink
-            )
+            manaFragmentCategoryRepository.getChekcsCategory(categoryId).collect {
+                _manaChecks.value = it
+            }
         }
-    }
 
+    }
 }

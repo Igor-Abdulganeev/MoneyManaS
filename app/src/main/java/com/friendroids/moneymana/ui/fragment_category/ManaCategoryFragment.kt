@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.friendroids.moneymana.R
+import com.friendroids.moneymana.data.repository.ManaFragmentCategoryRepository
 import com.friendroids.moneymana.data.repository.ManaRepositoryImpl
 import com.friendroids.moneymana.db.DataBase
 import com.friendroids.moneymana.db.models.CheckEntity
@@ -25,7 +26,7 @@ class ManaCategoryFragment : Fragment(R.layout.fragment_mana_category_info) {
     private var listener: ActionCategory? = null
     private val fragmentCategoryViewModel: FragmentCategoryViewModel by viewModels {
         FragmentCategoryViewModelFactory(
-            ManaRepositoryImpl(DataBase.getInstance(requireContext().applicationContext))
+            ManaFragmentCategoryRepository(DataBase.getInstance(requireContext().applicationContext))
         )
     }
 
@@ -58,7 +59,7 @@ class ManaCategoryFragment : Fragment(R.layout.fragment_mana_category_info) {
     }
 
     private fun initObserves() {
-        fragmentCategoryViewModel.manaCategories.observe(this.viewLifecycleOwner, this::updCategory)
+        fragmentCategoryViewModel.manaChecks.observe(this.viewLifecycleOwner, this::updCategory)
     }
 
 
@@ -67,27 +68,13 @@ class ManaCategoryFragment : Fragment(R.layout.fragment_mana_category_info) {
         fragmentCategoryViewModel.updateManaProgress(categoryId)
     }
 
-    private fun updCategory(manaCategory: ManaCategory) {
+    private fun updCategory(checksEntity: List<CheckEntity>) {
 
-        nameCategory.text = manaCategory.title
-        imageCategory.setImageResource(manaCategory.imageId)
-        progressBarCategory.progress = manaCategory.percentRemained
+        nameCategory.text = ""// manaCategory.title
+        imageCategory.setImageResource(R.drawable.food_fork_drink)
+        progressBarCategory.progress = 33
 
-
-        val checks = listOf(
-            CheckEntity(1, 1, Date(10101), 123456.0),
-            CheckEntity(1, 1, Date(11032021000001), 120.0),
-            CheckEntity(1, 1, Date(12032021000001), 233.0),
-            CheckEntity(1, 1, Date(13032021000011), 5.0),
-            CheckEntity(1, 1, Date(13032021000201), 634.0),
-            CheckEntity(1, 1, Date(13032021010001), 100000.0),
-            CheckEntity(1, 1, Date(13032021000011), 5.0),
-            CheckEntity(1, 1, Date(13032021000201), 634.0),
-            CheckEntity(1, 1, Date(13032021010001), 100000.0)
-        )
-
-
-        val adapter = ManaCategoryAdapter(checks)
+        val adapter = ManaCategoryAdapter(checksEntity)
         list.adapter = adapter
         list.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
