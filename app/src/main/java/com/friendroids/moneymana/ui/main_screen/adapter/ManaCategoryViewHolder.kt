@@ -16,7 +16,7 @@ class ManaCategoryViewHolder(
             itemManaProgressBar.progress = manaCategory.percentRemained
             itemManaProgressBar.setIndicatorColor(manaCategory.status) //todo color resources
             itemManaProgressCustombar.setProgress(manaCategory.percentRemained)
-            itemManaImageView.setImageResource(R.drawable.food_fork_drink)
+            itemManaImageView.setImageResource(manaCategory.imageId)
 
             manaConstraintLayout.setOnClickListener {
                 listener.invoke(manaCategory)
