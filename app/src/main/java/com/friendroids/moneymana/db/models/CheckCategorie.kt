@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import com.friendroids.moneymana.db.DBContract
 import java.util.*
 
-class CheckCategorie (
+class CheckCategorie(
     @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_ID)
     val _id: Int,
 
@@ -18,8 +18,8 @@ class CheckCategorie (
     val summa: Double,
 
     @ColumnInfo(name = "categorietitle")
-    val categorieTitle:String,
+    val categorieTitle: String,
 
     @ColumnInfo(name = "categorieimageid")
-    val categorieImageId:Int
+    val categorieImageId: Int
 )
