@@ -15,6 +15,7 @@
         android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/light_grey"
         android:layout_gravity="bottom"
         app:fabAlignmentMode="center" />
 
@@ -22,6 +23,8 @@
         android:id="@+id/camera_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_scanner"
         app:layout_anchor="@id/bottom_app_bar"
         tools:ignore="ContentDescription" />
 

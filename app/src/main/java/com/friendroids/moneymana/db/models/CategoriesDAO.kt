@@ -4,11 +4,12 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CategoriesDAO {
     @Query("SELECT * FROM categories ORDER BY _id ASC")
-    suspend fun getAll(): List<CategorieEntity>
+    suspend fun getAll(): Flow<List<CategorieEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(actorEntity: CategorieEntity)
