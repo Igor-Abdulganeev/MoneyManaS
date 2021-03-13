@@ -5,14 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import com.friendroids.moneymana.R
 import com.friendroids.moneymana.data.repository.ManaRepositoryImpl
 import com.friendroids.moneymana.databinding.DialogAddCategoryBinding
 import com.friendroids.moneymana.db.DataBase
 import com.friendroids.moneymana.ui.new_category.viewmodel.AddManaCategoryViewModel
 import com.friendroids.moneymana.ui.new_category.viewmodel.AddManaCategoryViewModelFactory
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
+import com.friendroids.moneymana.utils.extensions.changeColor
 
 class AddCategoryDialog : DialogFragment() {
 
@@ -39,7 +42,7 @@ class AddCategoryDialog : DialogFragment() {
             ConstraintLayout.LayoutParams.MATCH_PARENT,
             ConstraintLayout.LayoutParams.WRAP_CONTENT
         )
-        initView()
+        initViews()
     }
 
     override fun onDestroyView() {
@@ -47,26 +50,36 @@ class AddCategoryDialog : DialogFragment() {
         super.onDestroyView()
     }
 
-    private fun initView() {
-        binding.saveCategoryButton.setOnClickListener {
-            val newCategory = setupNewCategory()
-            newCategory?.let { updateDataBase(newCategory) }
-            dismiss()
+    private fun initViews() {
+        with(binding) {
+            categoryTitleEditText.addTextChangedListener { validateButton() }
+            sumLimitEditText.addTextChangedListener { validateButton() }
+            saveCategoryButton.setOnClickListener {
+                updateDataBase(setupNewCategory())
+                dismiss()
+            }
         }
     }
 
-    private fun setupNewCategory(): ManaCategory? {
-        val title = binding.categoryTitleEditText.text.toString()
-        val limit = binding.sumLimitEditText.text.toString()
-        return if (title.isNotBlank() && limit.isNotBlank()) {
-            val newCategory = ManaCategory(
-                title = title,
-                sumRemained = limit.toInt(),
-                maxSum = limit.toInt()
+    private fun validateButton() {
+        with(binding) {
+            saveCategoryButton.isEnabled =
+                categoryTitleEditText.text.isNotBlank() && sumLimitEditText.text.isNotBlank()
+            if (saveCategoryButton.isEnabled) saveCategoryButton.changeColor(
+                requireContext(),
+                R.color.bright_yellow
             )
-            newCategory
-        } else null
+            else saveCategoryButton.changeColor(requireContext(), R.color.button_disabled_grey)
+        }
     }
+
+    private fun setupNewCategory() =
+        ManaCategory(
+            title = binding.categoryTitleEditText.text.toString(),
+            sumRemained = binding.sumLimitEditText.text.toString().toInt(),
+            maxSum = binding.sumLimitEditText.text.toString().toInt()
+        )
+
 
     private fun updateDataBase(newCategory: ManaCategory) {
         viewModel.insertToDataBase(newCategory)

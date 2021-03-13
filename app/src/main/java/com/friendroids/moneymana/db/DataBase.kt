@@ -11,8 +11,8 @@ import com.friendroids.moneymana.db.models.*
 import java.util.*
 
 @Database(
-    entities = [CategorieEntity::class, CheckEntity::class, BudgetParameterEntity::class],
-    version = 2
+    entities = [CategorieEntity::class, CheckEntity::class, BudgetParameterEntity::class, TotalBudgetEntity::class],
+    version = 1
 )
 @TypeConverters(DateConverter::class)
 abstract class DataBase : RoomDatabase() {
@@ -44,6 +44,7 @@ abstract class DataBase : RoomDatabase() {
                             it.categoriesDAO.insertList(categorieExample)
                             it.checksDAO.insertList(checkExample)
                             it.budgetParametersDAO.insertList(budgetParameterExample)
+                            it.budgetParametersDAO.updateTotalBudget(defaultSettings)
                         }
 
                     }
@@ -60,11 +61,12 @@ abstract class DataBase : RoomDatabase() {
 //        )
 
         private val categorieExample = listOf(
-            CategorieEntity(null, R.drawable.food, "Total budget", 87900, 100000),
+//            CategorieEntity(null, R.drawable.food, "Total budget", 87900, 100000),
             CategorieEntity(null, R.drawable.food, "Foods", 10000, 10000),
             CategorieEntity(null, R.drawable.food, "Fuel", 2500, 5000),
             CategorieEntity(null, R.drawable.food, "Clothes", 800, 8000),
-            CategorieEntity(null, R.drawable.food, "Other", 8000, 10000)
+            CategorieEntity(null, R.drawable.food, "Other", 8000, 10000),
+            CategorieEntity(null, R.drawable.food, "TestMinus", -200, 10000)
         )
 
         private val checkExample = listOf(
@@ -122,5 +124,7 @@ abstract class DataBase : RoomDatabase() {
             BudgetParameterEntity(0, 3, getDateBudget(), 8000.00, 800.00),
             BudgetParameterEntity(0, 4, getDateBudget(), 10000.00, 8900.00)
         )
+
+        private val defaultSettings = TotalBudgetEntity(sum = 0, daysTillRestartCount = 30)
     }
 }
