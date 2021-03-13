@@ -16,11 +16,11 @@ import java.util.*
 class PurchaseDB(applicationContext: Context) {
     private val purchaseDB = DataBase.create(applicationContext)
 
-    suspend fun loadCategories(): Flow<List<Categorie>> = flow {
+    /*suspend fun loadCategories(): Flow<List<Categorie>> = flow {
         purchaseDB.categoriesDAO.getAll().collect { categorieEntity ->
             emit(categorieEntity.map { toCategorie(it) })
         }
-    }
+    }*/
 
     suspend fun updateCategorieInDB(categorie: ManaCategory): Boolean =
         withContext(Dispatchers.IO) {

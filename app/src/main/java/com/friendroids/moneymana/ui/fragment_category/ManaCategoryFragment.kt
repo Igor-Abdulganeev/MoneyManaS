@@ -12,19 +12,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.friendroids.moneymana.R
 import com.friendroids.moneymana.data.repository.ManaRepositoryImpl
+import com.friendroids.moneymana.db.DataBase
 import com.friendroids.moneymana.db.models.CheckEntity
 import com.friendroids.moneymana.ui.fragment_category.adapter.ManaCategoryAdapter
 import com.friendroids.moneymana.ui.fragment_category.viewmodel.FragmentCategoryViewModel
 import com.friendroids.moneymana.ui.fragment_category.viewmodel.FragmentCategoryViewModelFactory
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
-import java.text.SimpleDateFormat
 import java.util.*
 
 class ManaCategoryFragment : Fragment(R.layout.fragment_mana_category_info) {
 
     private var listener: ActionCategory? = null
     private val fragmentCategoryViewModel: FragmentCategoryViewModel by viewModels {
-        FragmentCategoryViewModelFactory(ManaRepositoryImpl())
+        FragmentCategoryViewModelFactory(
+            ManaRepositoryImpl(DataBase.getInstance(requireContext().applicationContext))
+        )
     }
 
     private lateinit var nameCategory: TextView

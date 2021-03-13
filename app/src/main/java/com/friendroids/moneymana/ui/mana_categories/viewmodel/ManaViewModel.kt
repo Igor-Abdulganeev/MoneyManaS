@@ -25,7 +25,7 @@ class ManaViewModel(private val manaRepository: ManaRepository) : ViewModel() {
         }
     }
 
-    fun getUserManaState() {
-        _manaCategories.value = manaRepository.getManaCategories()
-    }
+    /* fun getUserManaState() {
+         _manaCategories.value = manaRepository.getManaCategories()
+     }*/
 }

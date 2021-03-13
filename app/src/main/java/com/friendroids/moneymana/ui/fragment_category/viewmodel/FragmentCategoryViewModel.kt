@@ -16,7 +16,12 @@ class FragmentCategoryViewModel(private val manaRepository: ManaRepository) : Vi
 
     fun updateManaProgress(categoryId: Int) {
         viewModelScope.launch {
-            _manaCategories.value = ManaCategory("Fuel", 2500, 5000, R.drawable.food_fork_drink)
+            _manaCategories.value = ManaCategory(
+                title="Fuel",
+                sumRemained=2500,
+                maxSum = 5000,
+                imageId = R.drawable.food_fork_drink
+            )
         }
     }
 
