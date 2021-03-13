@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-//                .replace(R.id.container, MainFragment())
-                .replace(R.id.container, CameraFragment.newInstance())
+                .replace(R.id.container, ManaCategoriesFragment())
+//                .replace(R.id.container, CameraFragment.newInstance())
                 .commit()
         }
     }
