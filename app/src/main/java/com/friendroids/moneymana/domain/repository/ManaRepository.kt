@@ -10,5 +10,7 @@ interface ManaRepository {
 
     fun getManaCategories(): Flow<List<ManaCategory>>
 
+    suspend fun getListCategory(): List<ManaCategory>
+
     suspend fun insertManaCategory(manaCategory: ManaCategory)
 }

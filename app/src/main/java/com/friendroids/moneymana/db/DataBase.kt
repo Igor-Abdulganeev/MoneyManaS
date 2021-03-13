@@ -61,11 +61,11 @@ abstract class DataBase : RoomDatabase() {
 //        )
 
         private val categorieExample = listOf(
-//            CategorieEntity(null, R.drawable.food, "Total budget", 87900, 100000),
+            CategorieEntity(null, R.drawable.bag_suitcase, "Total budget", 87900, 100000),
             CategorieEntity(null, R.drawable.food, "Foods", 10000, 10000),
-            CategorieEntity(null, R.drawable.food, "Fuel", 2500, 5000),
-            CategorieEntity(null, R.drawable.food, "Clothes", 800, 8000),
-            CategorieEntity(null, R.drawable.food, "Other", 8000, 10000),
+            CategorieEntity(null, R.drawable.fuel, "Fuel", 2500, 5000),
+            CategorieEntity(null, R.drawable.face_man_profile, "Clothes", 800, 8000),
+            CategorieEntity(null, R.drawable.adjust, "Other", 8000, 10000),
             CategorieEntity(null, R.drawable.food, "TestMinus", -200, 10000)
         )
 

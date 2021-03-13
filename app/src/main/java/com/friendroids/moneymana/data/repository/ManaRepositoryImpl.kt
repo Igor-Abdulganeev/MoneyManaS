@@ -24,6 +24,18 @@ class ManaRepositoryImpl(private val db: DataBase) : ManaRepository {
             db.categoriesDAO.insert(manaCategory.convertMana())
         }
 
+    override suspend fun getListCategory(): List<ManaCategory> = withContext(Dispatchers.IO) {
+        db.categoriesDAO.getListAll().map {
+            ManaCategory(
+                id = it._id,
+                title = it.title,
+                sumRemained = it.sumRemained,
+                maxSum = it.maxSum,
+                imageId = it.imageId
+            )
+        }
+    }
+
     private fun convertListMana(list: List<CategorieEntity>): List<ManaCategory> =
         list.map {
             ManaCategory(
