@@ -21,6 +21,9 @@ interface BudgetParametersDAO {
     @Query("DELETE FROM budgetparameters")
     suspend fun deleteAll()
 
+    @Query("SELECT * FROM budgetparameters WHERE (datebudget BETWEEN :dateStart AND :dateEnd) AND (categorieid = :categorie)")
+    fun getBudgetParameterByDateCategorie(dateStart: Date, dateEnd: Date, categorie: Int): BudgetParameterEntity
+
     @Query("SELECT * FROM budgetparameters WHERE datebudget = :dateBudget")
     fun getBudgetParametersByDate(dateBudget: Date): List<BudgetParameterEntity>
 
