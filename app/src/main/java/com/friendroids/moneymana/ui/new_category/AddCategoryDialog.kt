@@ -6,13 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
+import com.friendroids.moneymana.data.repository.ManaRepositoryImpl
 import com.friendroids.moneymana.databinding.DialogAddCategoryBinding
+import com.friendroids.moneymana.db.DataBase
+import com.friendroids.moneymana.ui.new_category.viewmodel.AddManaCategoryViewModel
+import com.friendroids.moneymana.ui.new_category.viewmodel.AddManaCategoryViewModelFactory
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
 
 class AddCategoryDialog : DialogFragment() {
 
     private var _binding: DialogAddCategoryBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: AddManaCategoryViewModel by viewModels {
+        AddManaCategoryViewModelFactory(
+            ManaRepositoryImpl(DataBase.getInstance(requireContext().applicationContext))
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,7 +69,7 @@ class AddCategoryDialog : DialogFragment() {
     }
 
     private fun updateDataBase(newCategory: ManaCategory) {
-        //todo
+        viewModel.insertToDataBase(newCategory)
     }
 
     companion object {

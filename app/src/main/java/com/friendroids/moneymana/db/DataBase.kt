@@ -12,7 +12,7 @@ import java.util.*
 
 @Database(
     entities = [CategorieEntity::class, CheckEntity::class, BudgetParameterEntity::class],
-    version = 1
+    version = 2
 )
 @TypeConverters(DateConverter::class)
 abstract class DataBase : RoomDatabase() {

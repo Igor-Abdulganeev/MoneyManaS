@@ -10,13 +10,13 @@ import kotlinx.coroutines.flow.map
 class ManaRepositoryImpl(private val db: DataBase) : ManaRepository {
 
     override fun getManaCategories(): Flow<List<ManaCategory>> =
-        db.categoriesDAO.getAll().map { convertMana(it) }
+        db.categoriesDAO.getAll().map { convertListMana(it) }
 
-    override fun insertManaCategory(manaCategory: ManaCategory) {
-        TODO("Not yet implemented")
+    override suspend fun insertManaCategory(manaCategory: ManaCategory) {
+        manaCategory.convertMana()?.let { db.categoriesDAO.insert(it) }
     }
 
-    private fun convertMana(list: List<CategorieEntity>): List<ManaCategory> =
+    private fun convertListMana(list: List<CategorieEntity>): List<ManaCategory> =
         list.map {
             ManaCategory(
                 id = it._id,
@@ -26,4 +26,13 @@ class ManaRepositoryImpl(private val db: DataBase) : ManaRepository {
                 imageId = it.imageId
             )
         }
+
+    private fun ManaCategory.convertMana() =
+        CategorieEntity(
+            title = title,
+            maxSum = maxSum,
+            sumRemained = sumRemained,
+            imageId = imageId
+        )
+
 }

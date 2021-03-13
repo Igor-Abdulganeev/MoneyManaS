@@ -12,7 +12,7 @@ interface CategoriesDAO {
     suspend fun getAll(): Flow<List<CategorieEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(actorEntity: CategorieEntity)
+    suspend fun insert(categorieEntity: CategorieEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(categorieEntityList: List<CategorieEntity>)
