@@ -11,7 +11,7 @@ import com.friendroids.moneymana.db.DBContract
     indices = [Index(DBContract.Categories.COLUMN_NAME_ID)]
 )
 class CategorieEntity(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = DBContract.Categories.COLUMN_NAME_ID)
     val _id: Int,
 
@@ -19,5 +19,7 @@ class CategorieEntity(
     val imageId: Int,
 
     @ColumnInfo(name = DBContract.Categories.COLUMN_NAME_TITLE)
-    val title: String
+    val title: String,
+    val sumRemained: Int,
+    val maxSum: Int
 )

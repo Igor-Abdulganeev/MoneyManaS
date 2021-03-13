@@ -18,6 +18,11 @@ abstract class DataBase : RoomDatabase() {
     abstract val budgetParametersDAO: BudgetParametersDAO
 
     companion object {
+        private var instance: DataBase? = null
+
+        fun newInstance(context: Context) = instance ?: synchronized(this) {
+            instance ?: create(context).also { instance = it }
+        }
 
         fun create(applicationContext: Context): DataBase = Room.databaseBuilder(
             applicationContext,

@@ -8,8 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.friendroids.moneymana.data.repository.ManaRepositoryImpl
 import com.friendroids.moneymana.databinding.FragmentManaCategoriesBinding
+import com.friendroids.moneymana.db.DataBase
 import com.friendroids.moneymana.ui.mana_categories.adapter.ManaCategoriesAdapter
-import com.friendroids.moneymana.ui.mana_categories.viewmodel.ManaViewModel
+import com.friendroids.moneymana.ui.mana_categories.viewmodel.ManaCategoriesViewModel
 import com.friendroids.moneymana.ui.mana_categories.viewmodel.ManaViewModelFactory
 import com.friendroids.moneymana.ui.new_category.AddCategoryDialog
 import com.friendroids.moneymana.ui.new_category.AddCategoryDialog.Companion.ADD_CATEGORY_DIALOG_TAG
@@ -20,9 +21,9 @@ class ManaCategoriesFragment : Fragment() {
 
     private var _binding: FragmentManaCategoriesBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: ManaViewModel by viewModels {
+    private val viewModel: ManaCategoriesViewModel by viewModels {
         ManaViewModelFactory(
-            ManaRepositoryImpl()
+            ManaRepositoryImpl(DataBase.newInstance(requireContext().applicationContext))
         )
     }
     private lateinit var manaCategoriesAdapter: ManaCategoriesAdapter
