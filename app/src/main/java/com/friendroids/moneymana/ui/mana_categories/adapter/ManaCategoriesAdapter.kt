@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.friendroids.moneymana.databinding.ItemManaBinding
+import com.friendroids.moneymana.ui.main_screen.adapter.ManaCategoryViewHolder
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
 
 class ManaCategoriesAdapter(private val listener: (ManaCategory) -> Unit) : RecyclerView.Adapter<ManaCategoryViewHolder>() {
