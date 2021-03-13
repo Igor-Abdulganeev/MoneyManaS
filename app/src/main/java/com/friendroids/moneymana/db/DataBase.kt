@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.friendroids.moneymana.R
 import com.friendroids.moneymana.db.models.*
 import java.util.*
 
@@ -50,12 +51,20 @@ abstract class DataBase : RoomDatabase() {
             })
             .build()
 
+//        private val categorieExample = listOf(
+//            CategorieEntity(0, 1, "Total budget"),
+//            CategorieEntity(0, 1, "Foods"),
+//            CategorieEntity(0, 1, "Fuel"),
+//            CategorieEntity(0, 1, "Clothes"),
+//            CategorieEntity(0, 1, "Other")
+//        )
+
         private val categorieExample = listOf(
-            CategorieEntity(0, 1, "Total budget"),
-            CategorieEntity(0, 1, "Foods"),
-            CategorieEntity(0, 1, "Fuel"),
-            CategorieEntity(0, 1, "Clothes"),
-            CategorieEntity(0, 1, "Other")
+            CategorieEntity(0, R.drawable.food, "Total budget",87900, 100000),
+            CategorieEntity(0, R.drawable.food, "Foods",10000, 10000),
+            CategorieEntity(0, R.drawable.food, "Fuel", 2500, 5000),
+            CategorieEntity(0, R.drawable.food, "Clothes", 800, 8000),
+            CategorieEntity(0, R.drawable.food, "Other", 8000, 10000)
         )
 
         private val checkExample = listOf(

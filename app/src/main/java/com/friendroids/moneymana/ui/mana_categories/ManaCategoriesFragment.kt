@@ -23,7 +23,7 @@ class ManaCategoriesFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: ManaCategoriesViewModel by viewModels {
         ManaViewModelFactory(
-            ManaRepositoryImpl(DataBase.newInstance(requireContext().applicationContext))
+            ManaRepositoryImpl(DataBase.getInstance(requireContext().applicationContext))
         )
     }
     private lateinit var manaCategoriesAdapter: ManaCategoriesAdapter
