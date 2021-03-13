@@ -92,13 +92,13 @@ class PurchaseDB(applicationContext: Context) {
             true
         }
 
-    private fun toCategorie(categorieEntity: CategorieEntity): Categorie {
-        return categorieEntity?.let { categorieEntity ->
-            with(categorieEntity) {
-                Categorie(id = _id, title = title, imageId = imageId)
-            }
-        }
-    }
+//    private fun toCategorie(categorieEntity: CategorieEntity): Categorie {
+//        return categorieEntity?.let { categorieEntity ->
+//            with(categorieEntity) {
+//                Categorie(id = _id, title = title, imageId = imageId)
+//            }
+//        }
+//    }
 
     private fun toCheck(checkCategorie: CheckCategorie): Check {
         return checkCategorie?.let { checkCategorie ->

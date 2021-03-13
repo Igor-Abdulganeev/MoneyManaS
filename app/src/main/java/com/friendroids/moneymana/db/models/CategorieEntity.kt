@@ -13,7 +13,7 @@ import com.friendroids.moneymana.db.DBContract
 class CategorieEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = DBContract.Categories.COLUMN_NAME_ID)
-    val _id: Int,
+    val _id: Int? = null,
 
     @ColumnInfo(name = DBContract.Categories.COLUMN_NAME_IMAGEID)
     val imageId: Int,
