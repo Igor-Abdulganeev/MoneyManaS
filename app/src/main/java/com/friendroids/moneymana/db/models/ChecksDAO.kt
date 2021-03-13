@@ -1,5 +1,6 @@
 package com.friendroids.moneymana.db.models
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -10,7 +11,10 @@ import java.util.*
 @Dao
 interface ChecksDAO {
     @Query("SELECT * FROM checks ORDER BY _id ASC")
-    suspend fun getAll(): List<CheckEntity>
+    fun getAll(): Flow<List<CheckEntity>>
+
+    @Query("SELECT * FROM checks WHERE categorieId == :idCategory ORDER BY _id ASC")
+    fun getAlltoCategory(idCategory: Int): Flow<List<CheckEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(checkEntity: CheckEntity)
