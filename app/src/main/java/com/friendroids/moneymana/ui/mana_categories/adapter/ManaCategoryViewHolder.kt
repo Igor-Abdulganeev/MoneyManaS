@@ -1,7 +1,6 @@
-package com.friendroids.moneymana.ui.main_screen.adapter
+package com.friendroids.moneymana.ui.mana_categories.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.friendroids.moneymana.R
 import com.friendroids.moneymana.databinding.ItemManaBinding
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
 
@@ -13,10 +12,7 @@ class ManaCategoryViewHolder(
     fun onBind(manaCategory: ManaCategory) {
         with(binding) {
             itemManaNameTextView.text = manaCategory.title
-            itemManaProgressBar.progress = manaCategory.percentRemained
-            itemManaProgressBar.setIndicatorColor(manaCategory.status) //todo color resources
-            itemManaProgressCustombar.setProgress(manaCategory.percentRemained)
-            itemManaImageView.setImageResource(R.drawable.food_fork_drink)
+            itemManaCustomProgressBar.progress = manaCategory.percentRemained
 
             manaConstraintLayout.setOnClickListener {
                 listener.invoke(manaCategory)

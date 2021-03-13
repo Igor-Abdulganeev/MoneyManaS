@@ -23,35 +23,25 @@
         android:id="@+id/item_mana_name_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/item_mana_progress_bar"
+        app:layout_constraintBottom_toTopOf="@id/item_mana_custom_progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:visibility="gone"
-        android:id="@+id/item_mana_progress_bar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_mana_name_text_view" />
-
-
     <ProgressBar
-        android:id="@+id/item_mana_progress_custombar"
+        android:id="@+id/item_mana_custom_progress_bar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:maxHeight="26dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:progressDrawable="@drawable/customprogressbar"
+        android:layout_marginTop="4dp"
+        android:maxHeight="26dp"
+        android:progressDrawable="@drawable/custom_progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_mana_progress_bar"
+        app:layout_constraintTop_toBottomOf="@+id/item_mana_name_text_view"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

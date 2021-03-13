@@ -8,8 +8,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.friendroids.moneymana.R
 import com.friendroids.moneymana.databinding.ActivityMainBinding
-import com.friendroids.moneymana.ui.main_screen.CameraFragment
-import com.friendroids.moneymana.ui.main_screen.MainFragment
+import com.friendroids.moneymana.ui.mana_categories.ManaCategoriesFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment())
+                .replace(R.id.container, ManaCategoriesFragment())
 //                .replace(R.id.container, CameraFragment.newInstance())
                 .commit()
         }
