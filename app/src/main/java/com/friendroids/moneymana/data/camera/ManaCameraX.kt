@@ -26,6 +26,7 @@ class ManaCameraX(
     private var cameraLens = CameraSelector.LENS_FACING_BACK
     private lateinit var imageCapture: ImageCapture
     private lateinit var inputImage: InputImage
+ //   private lateinit var imageAnalysis: ImageAnalysis
 
     private var _qrCode = MutableLiveData<String>()
     val qrCode: LiveData<String>
@@ -42,6 +43,7 @@ class ManaCameraX(
         )
     }
 
+    @SuppressLint("UnsafeExperimentalUsageError")
     private fun bindPreview(cameraProvider: ProcessCameraProvider) {
         val preview = Preview.Builder()
             .setTargetAspectRatio(AspectRatio.RATIO_16_9)
@@ -57,11 +59,32 @@ class ManaCameraX(
             .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
             .setTargetRotation(previewView.display.rotation)
             .build()
+/*
+        imageAnalysis = ImageAnalysis.Builder()
+            .setTargetAspectRatio(AspectRatio.RATIO_16_9)
+            .setTargetRotation(previewView.display.rotation)
+            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+            .build()
+        imageAnalysis.setAnalyzer(executor, { image ->
+            val scanImage = image.image
+            if (scanImage != null) {
+                inputImage = InputImage.fromMediaImage(
+                    scanImage,
+                    image.imageInfo.rotationDegrees
+                )
+                scanImage()
+                scanImage.close()
+                image.close()
+            }
+        })
+*/
+
         val camera = cameraProvider.bindToLifecycle(
             lifecycle,
             cameraSelector,
             imageCapture,
             preview
+            //  imageAnalysis
         )
     }
 
@@ -82,11 +105,10 @@ class ManaCameraX(
                                 _qrCode.value = barcode.displayValue
                             }
                         }
-
                     }
                 }
                 .addOnFailureListener {
-                    Log.d("ManaCameraX", " ОШИБКА СКАНА")
+                    Log.d("ManaCameraX", " ОШИБКА СКАНА = $it")
                 }
         }
     }
