@@ -15,6 +15,9 @@ interface ChecksDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(checkEntity: CheckEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertList(checkEntityList: List<CheckEntity>)
+
     @Query("DELETE FROM checks WHERE _id == :id")
     suspend fun deleteById(id: Long)
 

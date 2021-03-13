@@ -15,6 +15,9 @@ interface BudgetParametersDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(budgetParameter: BudgetParameterEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertList(budgetParameterList: List<BudgetParameterEntity>)
+
     @Query("DELETE FROM budgetparameters WHERE _id == :id")
     suspend fun deleteById(id: Long)
 
