@@ -31,4 +31,10 @@ object DBContract {
         const val COLUMN_NAME_SUMMA_PLAN = "summaplan"
         const val COLUMN_NAME_SUMMA_FACT = "summafact"
     }
+
+    object TotalBudget {
+        const val TABLE_NAME = "total_budget"
+        const val COLUMN_ID = "id"
+        const val TOTAL_BUDGET_PRIMARY_KEY = "TOTAL_BUDGET_PRIMARY_KEY"
+    }
 }

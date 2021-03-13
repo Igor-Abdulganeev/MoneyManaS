@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.friendroids.moneymana.R
 import com.friendroids.moneymana.data.repository.ManaRepositoryImpl
 import com.friendroids.moneymana.databinding.FragmentManaCategoriesBinding
 import com.friendroids.moneymana.db.DataBase
+import com.friendroids.moneymana.db.models.TotalBudgetEntity
 import com.friendroids.moneymana.ui.mana_categories.adapter.ManaCategoriesAdapter
 import com.friendroids.moneymana.ui.mana_categories.viewmodel.ManaCategoriesViewModel
 import com.friendroids.moneymana.ui.mana_categories.viewmodel.ManaViewModelFactory
@@ -40,14 +42,19 @@ class ManaCategoriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         viewModel.getUserManaState()
-        viewModel.manaCategories.observe(
-            viewLifecycleOwner,
-            { manaCategoriesAdapter.bindItems(it) })
+        initObservers()
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun initObservers() {
+        viewModel.manaCategories.observe(
+            viewLifecycleOwner,
+            { manaCategoriesAdapter.bindItems(it) })
+        viewModel.primarySettings.observe(viewLifecycleOwner, ::setupPrimarySettingsInfo)
     }
 
     private fun initViews() {
@@ -65,10 +72,9 @@ class ManaCategoriesFragment : Fragment() {
                 dialog.show(childFragmentManager, PRIMARY_SETTINGS_DIALOG)
             }
         }
-        getDataFromSharedPrefs()
     }
 
-    private fun getDataFromSharedPrefs() {
-        //todo
+    private fun setupPrimarySettingsInfo(settings: TotalBudgetEntity) {
+        binding.primarySettingsTextView.text = getString(R.string.budget_settings, settings.sum, settings.daysTillRestartCount)
     }
 }

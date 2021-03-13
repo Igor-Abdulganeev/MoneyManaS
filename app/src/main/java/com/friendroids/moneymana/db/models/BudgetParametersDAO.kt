@@ -37,4 +37,10 @@ interface BudgetParametersDAO {
                 "AND (budgetparameters.datebudget between :dateStart and :dateEnd)"
     )
     fun getBudgetParametersCByDate(dateStart: Date, dateEnd: Date): Flow<List<BudgetParameterCategorie>>
+
+    @Query("SELECT * FROM total_budget WHERE id == :id")
+    fun getTotalBudget(id: String): Flow<TotalBudgetEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun updateTotalBudget(totalBudgetEntity: TotalBudgetEntity)
 }

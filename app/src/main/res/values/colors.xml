@@ -13,5 +13,8 @@
     <color name="dark_yellow">#c66900</color>
     <color name="grey">#33373C</color>
     <color name="light_grey">#828A93</color>
+    <color name="button_disabled_grey">#C6CBD1</color>
     <color name="main_button_color">#73354A</color>
+    <color name="green">#4CAF50</color>
+    <color name="raspberry_red">#913554</color>
 </resources>
