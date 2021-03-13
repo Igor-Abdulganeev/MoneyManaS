@@ -12,8 +12,9 @@ class ManaCategoryViewHolder(
     fun onBind(manaCategory: ManaCategory) {
         with(binding) {
             itemManaNameTextView.text = manaCategory.title
-            itemManaProgressBar.progress = manaCategory.percentRemained
-            itemManaProgressBar.setIndicatorColor(manaCategory.status) //todo color resources
+            itemManaImageView.setImageResource(manaCategory.imageId)
+            itemManaCustomProgressBar.progress = manaCategory.percentRemained
+
             manaConstraintLayout.setOnClickListener {
                 listener.invoke(manaCategory)
             }
