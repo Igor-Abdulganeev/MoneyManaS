@@ -1,4 +1,4 @@
-package com.friendroids.moneymana.ui.main_screen
+package com.friendroids.moneymana.ui.camera
 
 import android.annotation.SuppressLint
 import android.os.Bundle

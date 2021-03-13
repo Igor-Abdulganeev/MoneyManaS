@@ -1,4 +1,4 @@
-package com.friendroids.moneymana.ui.main_screen.adapter
+package com.friendroids.moneymana.ui.mana_categories.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.friendroids.moneymana.ui.main_screen.viewmodel
+package com.friendroids.moneymana.ui.mana_categories.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

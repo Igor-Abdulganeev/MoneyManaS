@@ -8,7 +8,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.friendroids.moneymana.R
 import com.friendroids.moneymana.databinding.ActivityMainBinding
-import com.friendroids.moneymana.ui.main_screen.CameraFragment
+import com.friendroids.moneymana.ui.mana_categories.ManaCategoriesFragment
 
 class MainActivity : AppCompatActivity() {
 

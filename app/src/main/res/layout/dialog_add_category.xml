@@ -33,7 +33,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/save_category_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_marginTop="40dp"
         android:backgroundTint="@color/bright_yellow"
         android:text="@string/save"
