@@ -3,6 +3,7 @@ package com.friendroids.moneymana.ui
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.view.HapticFeedbackConstants
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.cameraButton.setOnClickListener {
+            binding.cameraButton.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
             val foundFragments = supportFragmentManager.fragments
             if (foundFragments.count() > 0) {
                 val fragment = foundFragments[0]

@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.ListAdapter
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.friendroids.moneymana.R
 import com.friendroids.moneymana.data.camera.ManaCameraX
 import com.friendroids.moneymana.databinding.FragmentCameraBinding
 import java.util.concurrent.Executor
@@ -38,13 +41,28 @@ class CameraFragment : Fragment() {
         cameraX.qrCode.observe(viewLifecycleOwner, Observer { qrc ->
             qrc?.let {
                 val list = it.split("&")
-                binding.textQRCode.text = "${list[0]} \n ${list[1]}"
+                val date = "${list[0].subSequence(8, 10)}.${
+                    list[0].subSequence(
+                        6,
+                        8
+                    )
+                }.${list[0].subSequence(2, 6)}"
+                val sum = list[1].substring(2)
+                binding.dateTextedit.setText(date)
+                binding.moneyTextedit.setText(sum)
             }
         })
-        binding.button.setOnClickListener {
-            scan()
-        }
         cameraX.bindCamera()
+
+        bindSpinner()
+    }
+
+    private fun bindSpinner() {
+        val listCategory = listOf<String>("Еда", "Не еда", "Совсем не еда", "По умолчанию")
+        val listAdapter = ArrayAdapter(requireContext(), R.layout.item_category, listCategory)
+        listAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.categorySpinner.adapter = listAdapter
+        binding.categorySpinner.setSelection(3)
     }
 
     fun scan() {

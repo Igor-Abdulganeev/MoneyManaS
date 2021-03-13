@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="dark_blue">#222532</color>
     <color name="bright_yellow">#FF9800</color>
+    <color name="light_yellow">#ffc947</color>
     <color name="grey">#33373C</color>
     <color name="light_grey">#828A93</color>
     <color name="main_button_color">#73354A</color>
