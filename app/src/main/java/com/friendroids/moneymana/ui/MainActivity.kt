@@ -2,13 +2,16 @@ package com.friendroids.moneymana.ui
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.friendroids.moneymana.R
 import com.friendroids.moneymana.databinding.ActivityMainBinding
+import com.friendroids.moneymana.ui.camera.CameraFragment
 import com.friendroids.moneymana.ui.mana_categories.ManaCategoriesFragment
+import com.friendroids.moneymana.ui.presentation_models.ManaCategory
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,10 +24,29 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, ManaCategoriesFragment())
-//                .replace(R.id.container, CameraFragment.newInstance())
+                .replace(R.id.container, ManaCategoriesFragment(), MAIN_FRAGMENT)
                 .commit()
+            binding.cameraButton.setImageResource(R.drawable.add_shopping_24)
         }
+
+        binding.cameraButton.setOnClickListener {
+            val foundFragments = supportFragmentManager.fragments
+            if (foundFragments.count() > 0) {
+                val fragment = foundFragments[0]
+                if (fragment is CameraFragment) {
+                    fragment.scan()
+                } else {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, CameraFragment.newInstance(), CAMERA_FRAGMENT)
+                        .addToBackStack(null)
+                        .commit()
+                    binding.cameraButton.setImageResource(R.drawable.add_photo_24)
+                }
+            } else {
+                Log.d(TAG, "$TAG - что то пошло не так с фрагментами")
+            }
+        }
+        binding.cameraButton.setImageResource(R.drawable.add_shopping_24)
     }
 
     override fun onResume() {
@@ -55,7 +77,6 @@ class MainActivity : AppCompatActivity() {
                 ).show()
             }
         }
-
     }
 
     private fun allPermissionsGranted(): Boolean =
@@ -69,5 +90,8 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
+        private const val CAMERA_FRAGMENT = "CameraFragment"
+        private const val MAIN_FRAGMENT = "MainFragment"
+        private const val TAG = "MainActivity"
     }
 }

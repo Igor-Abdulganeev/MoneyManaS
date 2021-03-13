@@ -42,12 +42,17 @@ class CameraFragment : Fragment() {
             }
         })
         binding.button.setOnClickListener {
-            cameraX.scanQRCode()
+            scan()
         }
         cameraX.bindCamera()
+    }
+
+    fun scan() {
+        cameraX.scanQRCode()
     }
 
     companion object {
         fun newInstance() = CameraFragment()
     }
+
 }
