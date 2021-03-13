@@ -1,4 +1,4 @@
-package com.friendroids.moneymana.ui.main_screen.adapter
+package com.friendroids.moneymana.ui.mana_categories.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.friendroids.moneymana.databinding.ItemManaBinding

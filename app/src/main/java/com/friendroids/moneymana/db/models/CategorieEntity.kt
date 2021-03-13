@@ -19,5 +19,7 @@ class CategorieEntity(
     val imageId: Int,
 
     @ColumnInfo(name = DBContract.Categories.COLUMN_NAME_TITLE)
-    val title: String
+    val title: String,
+    val sumRemained: Int,
+    val maxSum: Int
 )

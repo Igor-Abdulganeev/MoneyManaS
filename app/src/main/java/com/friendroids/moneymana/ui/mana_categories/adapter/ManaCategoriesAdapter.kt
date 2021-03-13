@@ -2,12 +2,13 @@ package com.friendroids.moneymana.ui.mana_categories.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.friendroids.moneymana.databinding.ItemManaBinding
-import com.friendroids.moneymana.ui.main_screen.adapter.ManaCategoryViewHolder
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
 
-class ManaCategoriesAdapter(private val listener: (ManaCategory) -> Unit) : RecyclerView.Adapter<ManaCategoryViewHolder>() {
+class ManaCategoriesAdapter(private val listener: (ManaCategory) -> Unit) :
+    RecyclerView.Adapter<ManaCategoryViewHolder>() {
 
     private var items = listOf<ManaCategory>()
 
@@ -27,6 +28,9 @@ class ManaCategoriesAdapter(private val listener: (ManaCategory) -> Unit) : Recy
     override fun getItemCount(): Int = items.size
 
     fun bindItems(newItems: List<ManaCategory>) {
+        val diffUtilCallback = ManaCategoriesDiffUtilCallback(items, newItems)
+        val diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(diffUtilCallback)
+        diffResult.dispatchUpdatesTo(this)
         items = newItems
     }
 }

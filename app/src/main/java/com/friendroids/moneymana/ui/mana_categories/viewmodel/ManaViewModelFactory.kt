@@ -8,7 +8,7 @@ class ManaViewModelFactory(private val manaRepository: ManaRepository) : ViewMod
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = when (modelClass) {
-        ManaViewModel::class.java -> ManaViewModel(manaRepository)
+        ManaCategoriesViewModel::class.java -> ManaCategoriesViewModel(manaRepository)
         else -> throw IllegalArgumentException("$modelClass is not registered ViewModel")
     } as T
 }
