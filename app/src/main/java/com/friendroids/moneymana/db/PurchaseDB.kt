@@ -48,9 +48,20 @@ class PurchaseDB(applicationContext: Context) {
         }
     }
 
-    suspend fun updateCheckInDB(check: Check): Boolean =
+    suspend fun updateCheckInDB(check: Check, dateBudget:Date): Boolean =
         withContext(Dispatchers.IO) {
+            var c = Calendar.getInstance();
+            c.setTime(dateBudget);
+            c.add(Calendar.MONTH, 1);
+            purchaseDB.checksDAO.getCheckById(check.id)?.let {
+                purchaseDB.budgetParametersDAO.getBudgetParameterByDateCategorie(dateBudget,c.getTime(),check.categorie.id)?.let {
+                    purchaseDB.budgetParametersDAO.insert(BudgetParameterEntity(it._id,it.categorieId,it.dateBudget,it.summaPlan,it.summaFact-check.summa))
+                }
+            }
             purchaseDB.checksDAO.insert(toCheckEntity(check))
+            purchaseDB.budgetParametersDAO.getBudgetParameterByDateCategorie(dateBudget,c.getTime(),check.categorie.id)?.let {
+                purchaseDB.budgetParametersDAO.insert(BudgetParameterEntity(it._id,it.categorieId,it.dateBudget,it.summaPlan,it.summaFact+check.summa))
+            }
             true
         }
 

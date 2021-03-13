@@ -5,7 +5,8 @@ import android.graphics.Color
 data class ManaCategory(
     val title: String,
     val sumRemained: Int,
-    val maxSum: Int = 0
+    val maxSum: Int = 0,
+    val imageId: Int
 ) {
     val percentRemained: Int = sumRemained.getPercentage()
     val status: Int = when (percentRemained) {

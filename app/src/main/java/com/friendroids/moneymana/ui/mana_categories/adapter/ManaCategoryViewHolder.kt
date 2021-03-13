@@ -1,4 +1,4 @@
-package com.friendroids.moneymana.ui.mana_categories.adapter
+package com.friendroids.moneymana.ui.main_screen.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.friendroids.moneymana.databinding.ItemManaBinding
@@ -12,6 +12,7 @@ class ManaCategoryViewHolder(
     fun onBind(manaCategory: ManaCategory) {
         with(binding) {
             itemManaNameTextView.text = manaCategory.title
+            itemManaImageView.setImageResource(manaCategory.imageId)
             itemManaCustomProgressBar.progress = manaCategory.percentRemained
 
             manaConstraintLayout.setOnClickListener {
