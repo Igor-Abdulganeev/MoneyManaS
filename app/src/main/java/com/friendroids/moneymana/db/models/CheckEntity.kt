@@ -15,7 +15,7 @@ import java.util.*
 class CheckEntity(
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_ID)
-        val _id: Int,
+        val _id: Int? = null,
 
         @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_CATEGORIE_ID)
         val categorieId: Int,
