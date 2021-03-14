@@ -45,7 +45,9 @@ class PrimarySettingsDialog : DialogFragment() {
         )
         initViews()
         viewModel.settings.observe(viewLifecycleOwner, {
-            binding.totalAmountEditText.setText(it.sum.toString())
+            if (it.sum != 0) {
+                binding.totalAmountEditText.setText(it.sum.toString())
+            }
             binding.revertPeriodEditText.setText(it.daysTillRestartCount.toString())
         })
     }
@@ -69,7 +71,7 @@ class PrimarySettingsDialog : DialogFragment() {
     private fun validateButton() {
         with(binding) {
             saveSettingsButton.isEnabled =
-                totalAmountEditText.text.isNotBlank() && revertPeriodEditText.text.isNotBlank()
+                totalAmountEditText.text?.isNotBlank() == true && revertPeriodEditText.text?.isNotBlank() == true
             if (saveSettingsButton.isEnabled) saveSettingsButton.changeColor(
                 requireContext(),
                 R.color.bright_yellow

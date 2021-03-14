@@ -31,9 +31,9 @@ class AddCategoryDialog : DialogFragment() {
     private lateinit var adapter: AddCategoryAdapter
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = DialogAddCategoryBinding.inflate(inflater, container, false)
         return binding.root
@@ -64,32 +64,32 @@ class AddCategoryDialog : DialogFragment() {
         }
 
         val listImage: List<Int> = listOf(
-                R.drawable.adjust,
-                R.drawable.ambulance,
-                R.drawable.bag_suitcase,
-                R.drawable.baseball_bat,
-                R.drawable.beaker_check,
-                R.drawable.drama_masks,
-                R.drawable.face_man_profile,
-                R.drawable.food,
-                R.drawable.food_fork_drink,
-                R.drawable.food_variant,
-                R.drawable.fuel,
-                R.drawable.gas_station,
-                R.drawable.hiking,
-                R.drawable.trash_can_outline
+            R.drawable.adjust,
+            R.drawable.ambulance,
+            R.drawable.bag_suitcase,
+            R.drawable.baseball_bat,
+            R.drawable.beaker_check,
+            R.drawable.drama_masks,
+            R.drawable.face_man_profile,
+            R.drawable.food,
+            R.drawable.food_fork_drink,
+            R.drawable.food_variant,
+            R.drawable.fuel,
+            R.drawable.gas_station,
+            R.drawable.hiking,
+            R.drawable.trash_can_outline
         )
 
         adapter = AddCategoryAdapter(listImage)
         binding.recyclerViewId.adapter = adapter
         binding.recyclerViewId.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
     private fun validateButton() {
         with(binding) {
             saveCategoryButton.isEnabled =
-                categoryTitleEditText.text.isNotBlank() && sumLimitEditText.text.isNotBlank()
+                categoryTitleEditText.text?.isNotBlank() == true && sumLimitEditText.text?.isNotBlank() == true
             if (saveCategoryButton.isEnabled) saveCategoryButton.changeColor(
                 requireContext(),
                 R.color.bright_yellow
@@ -104,7 +104,6 @@ class AddCategoryDialog : DialogFragment() {
             sumRemained = binding.sumLimitEditText.text.toString().toInt(),
             maxSum = binding.sumLimitEditText.text.toString().toInt()
         )
-
 
     private fun updateDataBase(newCategory: ManaCategory) {
         viewModel.insertToDataBase(newCategory)

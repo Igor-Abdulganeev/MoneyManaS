@@ -9,6 +9,7 @@
         android:id="@+id/item_select_image_view"
         android:layout_width="96dp"
         android:layout_height="96dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/adjust"

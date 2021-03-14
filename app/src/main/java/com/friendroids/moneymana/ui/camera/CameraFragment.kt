@@ -25,6 +25,7 @@ import com.friendroids.moneymana.databinding.FragmentCameraBinding
 import com.friendroids.moneymana.db.DataBase
 import com.friendroids.moneymana.db.PurchaseDB
 import com.friendroids.moneymana.domain.repository.ManaRepository
+import com.friendroids.moneymana.ui.NavigationActivity
 import com.friendroids.moneymana.ui.presentation_models.Categorie
 import com.friendroids.moneymana.ui.presentation_models.Check
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
@@ -37,6 +38,7 @@ import java.util.concurrent.Executor
 
 class CameraFragment : Fragment() {
 
+    private var navigationActivity: NavigationActivity? = null
     private var _binding: FragmentCameraBinding? = null
     private val binding get() = _binding!!
 
@@ -49,6 +51,11 @@ class CameraFragment : Fragment() {
     private val listSpinner: LiveData<List<ManaCategory>>
         get() = _listSpinner
     private lateinit var listAdapter: SpinAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        navigationActivity = context as? NavigationActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -109,6 +116,11 @@ class CameraFragment : Fragment() {
             }
 
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        navigationActivity?.setImageResource(R.drawable.add_shopping_24)
     }
 
     private fun bindCamera() {

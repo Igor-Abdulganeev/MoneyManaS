@@ -1,5 +1,6 @@
 package com.friendroids.moneymana.ui.mana_categories
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.friendroids.moneymana.data.repository.ManaRepositoryImpl
 import com.friendroids.moneymana.databinding.FragmentManaCategoriesBinding
 import com.friendroids.moneymana.db.DataBase
 import com.friendroids.moneymana.db.models.TotalBudgetEntity
+import com.friendroids.moneymana.ui.NavigationActivity
 import com.friendroids.moneymana.ui.mana_categories.adapter.ManaCategoriesAdapter
 import com.friendroids.moneymana.ui.mana_categories.viewmodel.ManaCategoriesViewModel
 import com.friendroids.moneymana.ui.mana_categories.viewmodel.ManaViewModelFactory
@@ -21,6 +23,7 @@ import com.friendroids.moneymana.ui.settings.PrimarySettingsDialog.Companion.PRI
 
 class ManaCategoriesFragment : Fragment() {
 
+    private var navigationActivity: NavigationActivity? = null
     private var _binding: FragmentManaCategoriesBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ManaCategoriesViewModel by viewModels {
@@ -29,6 +32,11 @@ class ManaCategoriesFragment : Fragment() {
         )
     }
     private lateinit var manaCategoriesAdapter: ManaCategoriesAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        navigationActivity = context as? NavigationActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,8 +49,13 @@ class ManaCategoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        viewModel.getUserManaState()
         initObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getUserManaState()
+        navigationActivity?.setImageResource(R.drawable.add_photo_24)
     }
 
     override fun onDestroyView() {
