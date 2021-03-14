@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
@@ -10,39 +9,39 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/total_amount_text_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/total_amount_edit_text"
-            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:hint="@string/add_total_amount_name"
             android:inputType="number"
             android:maxLength="7"
+            android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="24sp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:textSize="24sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/revert_period_text_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/revert_period_edit_text"
-            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:hint="@string/set_revert_period"
             android:inputType="numberDecimal"
             android:maxLength="2"
+            android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="24sp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:textSize="24sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -53,6 +52,7 @@
         android:backgroundTint="@color/button_disabled_grey"
         android:enabled="false"
         android:text="@string/save"
+        android:textColor="@color/black"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

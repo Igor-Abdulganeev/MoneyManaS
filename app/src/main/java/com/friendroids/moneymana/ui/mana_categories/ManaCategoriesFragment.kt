@@ -55,7 +55,7 @@ class ManaCategoriesFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.getUserManaState()
-        navigationActivity?.setImageResource(R.drawable.add_photo_24)
+        navigationActivity?.setImageResource(R.drawable.ic_scanner)
     }
 
     override fun onDestroyView() {

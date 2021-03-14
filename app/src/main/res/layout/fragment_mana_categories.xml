@@ -32,7 +32,8 @@
         android:id="@+id/add_category_button"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:backgroundTint="@color/dark_yellow"
+        android:backgroundTint="@color/bright_yellow"
+        android:textColor="@color/black"
         android:insetLeft="0dp"
         android:insetTop="0dp"
         android:insetRight="0dp"
@@ -42,6 +43,7 @@
         app:iconGravity="textStart"
         app:iconPadding="0dp"
         app:iconSize="32dp"
+        app:iconTint="@color/black"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
         app:layout_constraintTop_toBottomOf="@id/top_guideline"
         tools:ignore="ContentDescription" />
