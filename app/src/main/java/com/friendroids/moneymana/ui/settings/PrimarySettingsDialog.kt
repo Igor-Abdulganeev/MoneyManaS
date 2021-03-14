@@ -45,10 +45,13 @@ class PrimarySettingsDialog : DialogFragment() {
         )
         initViews()
         viewModel.settings.observe(viewLifecycleOwner, {
-            if (it.sum != 0) {
-                binding.totalAmountEditText.setText(it.sum.toString())
+            if (it!= null){
+                if (it.sum != 0) {
+                    binding.totalAmountEditText.setText(it.sum.toString())
+                }
+                binding.revertPeriodEditText.setText(it.daysTillRestartCount.toString())
             }
-            binding.revertPeriodEditText.setText(it.daysTillRestartCount.toString())
+
         })
     }
 

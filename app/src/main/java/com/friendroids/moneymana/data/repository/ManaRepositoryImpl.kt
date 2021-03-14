@@ -9,7 +9,7 @@ import com.friendroids.moneymana.domain.repository.ManaRepository
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.zip
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.withContext
 
 class ManaRepositoryImpl(private val db: DataBase) : ManaRepository {
@@ -19,7 +19,7 @@ class ManaRepositoryImpl(private val db: DataBase) : ManaRepository {
 
     override fun getManaCategories(): Flow<List<ManaCategory>> =
         db.categoriesDAO.getAll()
-            .zip(db.checksDAO.getAll()) { categories: List<CategorieEntity>, checks: List<CheckEntity> ->
+            .combine(db.checksDAO.getAll()) { categories: List<CategorieEntity>, checks: List<CheckEntity> ->
                 convertListMana(categories, checks)
             }
 
