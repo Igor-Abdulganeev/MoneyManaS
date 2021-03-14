@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import com.friendroids.moneymana.R
 import com.friendroids.moneymana.databinding.ActivityMainBinding
 import com.friendroids.moneymana.ui.camera.CameraFragment
+import com.friendroids.moneymana.ui.fragment_category.ManaCategoryFragment
 import com.friendroids.moneymana.ui.mana_categories.ManaCategoriesFragment
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
 
@@ -62,6 +63,13 @@ class MainActivity : AppCompatActivity(), NavigationActivity {
 
     override fun setImageResource(resId: Int) {
         binding.cameraButton.setImageResource(resId)
+    }
+
+    override fun openCategoryFragment(idCategory: Int) {
+        supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.container, ManaCategoryFragment.newInstance(idCategory), MAIN_FRAGMENT)
+            .commit()
     }
 
     override fun onRequestPermissionsResult(

@@ -72,7 +72,11 @@ class ManaCategoriesFragment : Fragment() {
 
     private fun initViews() {
         manaCategoriesAdapter = ManaCategoriesAdapter {
-            viewModel.updateManaProgress(it)
+            if (it.id!= null) {
+                navigationActivity?.openCategoryFragment(it.id)
+            }
+
+
         }
         binding.manaRecyclerView.adapter = manaCategoriesAdapter
         with(binding) {
@@ -88,6 +92,7 @@ class ManaCategoriesFragment : Fragment() {
     }
 
     private fun setupPrimarySettingsInfo(settings: TotalBudgetEntity) {
-        binding.primarySettingsTextView.text = getString(R.string.budget_settings, settings.sum, settings.daysTillRestartCount)
+        binding.primarySettingsTextView.text =
+            getString(R.string.budget_settings, settings.sum, settings.daysTillRestartCount)
     }
 }
