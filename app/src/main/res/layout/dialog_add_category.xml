@@ -1,54 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     android:padding="16dp">
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/category_title_text_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/category_title_edit_text"
-            android:hint="@string/add_category_name"
-            android:textAlignment="center"
-            android:inputType="textPersonName"
-            android:textColor="@color/black"
-            android:textSize="24sp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:hint="@string/add_category_name"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/sum_limit_text_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/sum_limit_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:hint="@string/set_limit"
-            android:textAlignment="center"
             android:inputType="number"
             android:maxLength="7"
+            android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="24sp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:textSize="24sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="24dp"
         android:id="@+id/recycler_view_id"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toTopOf="@+id/save_category_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/sum_limit_edit_text"
@@ -62,6 +61,7 @@
         android:backgroundTint="@color/button_disabled_grey"
         android:enabled="false"
         android:text="@string/save"
+        android:textColor="@color/black"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

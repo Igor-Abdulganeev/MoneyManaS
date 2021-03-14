@@ -24,9 +24,9 @@ class ManaCategoryViewHolder(
                 itemManaSumRemainedTextView.text =
                     itemView.context.getString(R.string.overrun_sum, manaCategory.sumRemained)
             }
-            itemManaSumRemainedTextView.setTextColor(
-                ContextCompat.getColor(itemView.context, manaCategory.status)
-            )
+//            itemManaSumRemainedTextView.setTextColor(
+//                ContextCompat.getColor(itemView.context, manaCategory.status)
+//            )
 
             manaConstraintLayout.setOnClickListener {
                 listener.invoke(manaCategory)

@@ -74,7 +74,7 @@ class PrimarySettingsDialog : DialogFragment() {
                 totalAmountEditText.text?.isNotBlank() == true && revertPeriodEditText.text?.isNotBlank() == true
             if (saveSettingsButton.isEnabled) saveSettingsButton.changeColor(
                 requireContext(),
-                R.color.bright_yellow
+                R.color.light_yellow
             )
             else saveSettingsButton.changeColor(requireContext(), R.color.button_disabled_grey)
         }
@@ -88,7 +88,6 @@ class PrimarySettingsDialog : DialogFragment() {
         id = TOTAL_BUDGET_PRIMARY_KEY,
         sum = binding.totalAmountEditText.text.toString().toInt(),
         daysTillRestartCount = binding.revertPeriodEditText.text.toString().toInt()
-        //todo check if date was changed - replace periodic work request
     )
 
     companion object {

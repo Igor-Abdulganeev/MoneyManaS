@@ -8,9 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="dark_blue">#222532</color>
-    <color name="bright_yellow">#FF9800</color>
+    <color name="bright_yellow">#ffc947</color>
+    <color name="bright_green">#8BC34A</color>
     <color name="light_yellow">#ffc947</color>
-    <color name="dark_yellow">#c66900</color>
+    <color name="dark_yellow">#33373C</color>
     <color name="grey">#33373C</color>
     <color name="light_grey">#828A93</color>
     <color name="button_disabled_grey">#C6CBD1</color>

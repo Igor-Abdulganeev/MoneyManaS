@@ -12,7 +12,7 @@ import java.util.*
 
 @Database(
     entities = [CategorieEntity::class, CheckEntity::class, BudgetParameterEntity::class, TotalBudgetEntity::class],
-    version = 1
+    version = 2
 )
 @TypeConverters(DateConverter::class)
 abstract class DataBase : RoomDatabase() {
@@ -61,12 +61,12 @@ abstract class DataBase : RoomDatabase() {
 //        )
 
         private val categorieExample = listOf(
-            CategorieEntity(null, R.drawable.bag_suitcase, "Total budget", 87900, 100000),
-            CategorieEntity(null, R.drawable.food, "Foods", 10000, 10000),
-            CategorieEntity(null, R.drawable.fuel, "Fuel", 2500, 5000),
-            CategorieEntity(null, R.drawable.face_man_profile, "Clothes", 800, 8000),
-            CategorieEntity(null, R.drawable.adjust, "Other", 8000, 10000),
-            CategorieEntity(null, R.drawable.food, "TestMinus", -200, 10000)
+            //CategorieEntity(null, R.drawable.bag_suitcase, "Total budget", 87900, 100000),
+            CategorieEntity(null, R.drawable.food, "Продукты", 10000, 10000),
+            CategorieEntity(null, R.drawable.fuel, "Бензин", 2500, 5000),
+            CategorieEntity(null, R.drawable.face_man_profile, "Одежда", 800, 8000),
+            CategorieEntity(null, R.drawable.adjust, "Курсы", 8000, 10000),
+            CategorieEntity(null, R.drawable.food, "Другое", -200, 10000)
         )
 
         private val checkExample = listOf(
