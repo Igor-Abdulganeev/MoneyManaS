@@ -25,41 +25,59 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/date_textedit"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/date_textinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="2dp"
         android:enabled="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="4dp"
-        android:text="01.01.2021"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/panel_view" />
+        app:layout_constraintTop_toTopOf="@id/panel_view">
 
-    <EditText
-        android:id="@+id/money_textedit"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/date_textedit"
+            android:hint="@string/date"
+            android:inputType="time"
+            android:textAlignment="center"
+            android:enabled="false"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/money_textinput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="4dp"
-        android:text="0.00"
-        android:inputType="numberDecimal"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="24sp"
+        android:layout_marginBottom="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date_textedit" />
+        app:layout_constraintTop_toBottomOf="@id/date_textinput"
+        android:layout_gravity="top">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/money_textedit"
+            android:hint="@string/check_amount"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatSpinner
+        android:popupBackground="@android:color/transparent"
         android:id="@+id/category_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,7 +87,7 @@
         android:layout_marginBottom="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/money_textedit" />
+        app:layout_constraintTop_toBottomOf="@id/money_textinput" />
 
     <Button
         android:id="@+id/add_button"

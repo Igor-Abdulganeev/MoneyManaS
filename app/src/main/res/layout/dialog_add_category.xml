@@ -1,41 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:background="@color/white"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/category_title_edit_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/add_category_name"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="Autofill" />
 
-    <EditText
-        android:id="@+id/sum_limit_edit_text"
-        android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/category_title_text_input"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/category_title_edit_text"
+            android:hint="@string/add_category_name"
+            android:textAlignment="center"
+            android:inputType="textPersonName"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/sum_limit_text_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/sum_limit_edit_text"
+            android:hint="@string/set_limit"
+            android:textAlignment="center"
+            android:inputType="number"
+            android:maxLength="7"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="24dp"
-        android:hint="@string/set_limit"
-        android:inputType="number"
-        android:maxLength="7"
+        android:id="@+id/recycler_view_id"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toTopOf="@+id/save_category_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/category_title_edit_text"
-        tools:ignore="Autofill" />
+        app:layout_constraintStart_toStartOf="@+id/sum_limit_edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/sum_limit_edit_text" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/save_category_button"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/button_disabled_grey"
         android:enabled="false"
         android:text="@string/save"
@@ -46,14 +69,4 @@
         app:layout_constraintTop_toBottomOf="@id/sum_limit_edit_text"
         app:layout_constraintVertical_bias="1" />
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_id"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:layout_constraintBottom_toTopOf="@+id/save_category_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/sum_limit_edit_text"
-        app:layout_constraintTop_toBottomOf="@+id/sum_limit_edit_text" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

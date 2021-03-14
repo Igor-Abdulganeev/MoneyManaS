@@ -1,7 +1,11 @@
 package com.friendroids.moneymana.db
 
 import android.content.Context
-import com.friendroids.moneymana.db.models.*
+import com.friendroids.moneymana.db.models.BudgetParameterCategorie
+import com.friendroids.moneymana.db.models.BudgetParameterEntity
+import com.friendroids.moneymana.db.models.CategorieEntity
+import com.friendroids.moneymana.db.models.CheckCategorie
+import com.friendroids.moneymana.db.models.CheckEntity
 import com.friendroids.moneymana.ui.presentation_models.BudgetParameter
 import com.friendroids.moneymana.ui.presentation_models.Categorie
 import com.friendroids.moneymana.ui.presentation_models.Check
@@ -11,7 +15,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 class PurchaseDB(applicationContext: Context) {
     private val purchaseDB = DataBase.create(applicationContext)
@@ -57,12 +62,12 @@ class PurchaseDB(applicationContext: Context) {
     suspend fun updateCheckInDB(check: Check, dateBudget: Date): Boolean =
         withContext(Dispatchers.IO) {
             var c = Calendar.getInstance();
-            c.setTime(dateBudget);
+            c.time = dateBudget;
             c.add(Calendar.MONTH, 1);
             purchaseDB.checksDAO.getCheckById(check.id)?.let {
                 purchaseDB.budgetParametersDAO.getBudgetParameterByDateCategorie(
                     dateBudget,
-                    c.getTime(),
+                    c.time,
                     check.categorie.id
                 )?.let {
                     purchaseDB.budgetParametersDAO.insert(

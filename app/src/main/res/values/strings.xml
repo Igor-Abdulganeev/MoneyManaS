@@ -8,5 +8,7 @@
     <string name="save">Сохранить</string>
     <string name="sum_remained">остаток: %d</string>
     <string name="overrun_sum">перерасход: %d</string>
-    <string name="budget_settings">%d рублей\n%d дней</string>
+    <string name="budget_settings">%d ₽\n%d дней</string>
+    <string name="check_amount">Сумма чека</string>
+    <string name="date">Дата</string>
 </resources>
