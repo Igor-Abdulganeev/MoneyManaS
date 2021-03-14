@@ -46,7 +46,6 @@ abstract class DataBase : RoomDatabase() {
                             it.budgetParametersDAO.insertList(budgetParameterExample)
                             it.budgetParametersDAO.updateTotalBudget(defaultSettings)
                         }
-
                     }
                 }
             })
@@ -62,11 +61,13 @@ abstract class DataBase : RoomDatabase() {
 
         private val categorieExample = listOf(
             //CategorieEntity(null, R.drawable.bag_suitcase, "Total budget", 87900, 100000),
+            CategorieEntity(null, R.drawable.drama_masks, "Развлечения", 30000, 40000),
+            CategorieEntity(null, R.drawable.hiking, "Путешествия", 10000, 60000),
             CategorieEntity(null, R.drawable.food, "Продукты", 10000, 10000),
             CategorieEntity(null, R.drawable.fuel, "Бензин", 2500, 5000),
             CategorieEntity(null, R.drawable.face_man_profile, "Одежда", 800, 8000),
             CategorieEntity(null, R.drawable.adjust, "Курсы", 8000, 10000),
-            CategorieEntity(null, R.drawable.food, "Другое", -200, 10000)
+            CategorieEntity(null, R.drawable.adjust, "Другое", -200, 10000)
         )
 
         private val checkExample = listOf(
