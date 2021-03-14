@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.friendroids.moneymana.R
 
 class AddCategoryAdapter(private var imageCategories: List<Int>) :
-        RecyclerView.Adapter<AddCategoryViewHolder>() {
+    RecyclerView.Adapter<AddCategoryViewHolder>() {
 
     private var _selected_position = 0
     val selected_position get() = _selected_position
@@ -22,7 +22,7 @@ class AddCategoryAdapter(private var imageCategories: List<Int>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddCategoryViewHolder {
         return AddCategoryViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false)
         )
     }
 
@@ -46,16 +46,14 @@ class AddCategoryAdapter(private var imageCategories: List<Int>) :
     }
 
     override fun getItemCount(): Int = imageCategories.size
-
 }
 
 class AddCategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val dateAndSumma: ImageView = itemView.findViewById(R.id.item_select_image_view)
-    private val selectTextView : TextView = itemView.findViewById(R.id.item_select_text_view)
+    private val selectTextView: TextView = itemView.findViewById(R.id.item_select_text_view)
 
     fun bind(id: Int) {
         dateAndSumma.setImageResource(id)
         selectTextView.text = id.toString()
     }
-
 }
