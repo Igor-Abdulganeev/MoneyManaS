@@ -1,9 +1,12 @@
-package com.friendroids.moneymana.db.models
+package com.friendroids.moneymana.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.friendroids.moneymana.db.models.BudgetParameterCategorie
+import com.friendroids.moneymana.db.models.BudgetParameterEntity
+import com.friendroids.moneymana.db.models.TotalBudgetEntity
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 

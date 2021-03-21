@@ -1,9 +1,10 @@
-package com.friendroids.moneymana.db.models
+package com.friendroids.moneymana.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.friendroids.moneymana.db.models.CategorieEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

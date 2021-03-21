@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
         <shape>
-            <solid android:color="@color/grey" />
+            <solid android:color="@color/granite_gray" />
             <corners android:radius="32dp" />
             <size
                 android:width="192dp"
@@ -14,9 +14,9 @@
             <shape>
                 <gradient
                     android:angle="0"
-                    android:centerColor="#D8C940"
-                    android:endColor="#0b6e07"
-                    android:startColor="#ff0002" />
+                    android:centerColor="@color/shiny_yellow_green"
+                    android:endColor="@color/indian_green"
+                    android:startColor="@color/pale_red" />
                 <corners android:radius="35dip" />
                 <size
                     android:width="192dp"

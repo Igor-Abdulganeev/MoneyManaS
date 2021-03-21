@@ -76,10 +76,10 @@ class PrimarySettingsDialog : DialogFragment() {
             saveSettingsButton.isEnabled =
                 totalAmountEditText.text?.isNotBlank() == true && revertPeriodEditText.text?.isNotBlank() == true
             if (saveSettingsButton.isEnabled) saveSettingsButton.changeColor(
-                requireContext(),
-                R.color.light_yellow
+                    requireContext(),
+                    R.color.primaryColor
             )
-            else saveSettingsButton.changeColor(requireContext(), R.color.button_disabled_grey)
+            else saveSettingsButton.changeColor(requireContext(), R.color.light_grey)
         }
     }
 

@@ -32,7 +32,7 @@
         android:id="@+id/add_category_button"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:backgroundTint="@color/bright_yellow"
+        android:backgroundTint="@color/primaryColor"
         android:textColor="@color/black"
         android:insetLeft="0dp"
         android:insetTop="0dp"
