@@ -10,7 +10,7 @@ import java.util.*
 
 @Entity(
         tableName = DBContract.Checks.TABLE_NAME,
-        indices = [Index(DBContract.Checks.COLUMN_NAME_ID)]
+        //  indices = [Index(DBContract.Checks.COLUMN_NAME_ID)]
 )
 class CheckEntity(
         @PrimaryKey(autoGenerate = true)

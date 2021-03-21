@@ -2,7 +2,7 @@ package com.friendroids.moneymana
 
 import android.app.Application
 
-class App : Application() {
+class AppMain : Application() {
 
     var selectedPosition = -1
 

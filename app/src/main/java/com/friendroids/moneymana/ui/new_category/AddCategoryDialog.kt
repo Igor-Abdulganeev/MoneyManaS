@@ -91,10 +91,10 @@ class AddCategoryDialog : DialogFragment() {
             saveCategoryButton.isEnabled =
                 categoryTitleEditText.text?.isNotBlank() == true && sumLimitEditText.text?.isNotBlank() == true
             if (saveCategoryButton.isEnabled) saveCategoryButton.changeColor(
-                requireContext(),
-                R.color.light_yellow
+                    requireContext(),
+                    R.color.primaryColor
             )
-            else saveCategoryButton.changeColor(requireContext(), R.color.button_disabled_grey)
+            else saveCategoryButton.changeColor(requireContext(), R.color.light_grey)
         }
     }
 

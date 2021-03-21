@@ -26,7 +26,7 @@ class ManaCameraX(
     private var cameraLens = CameraSelector.LENS_FACING_BACK
     private lateinit var imageCapture: ImageCapture
     private lateinit var inputImage: InputImage
- //   private lateinit var imageAnalysis: ImageAnalysis
+//    private lateinit var imageAnalysis: ImageAnalysis
 
     private var _qrCode = MutableLiveData<String>()
     val qrCode: LiveData<String>
@@ -59,6 +59,7 @@ class ManaCameraX(
             .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
             .setTargetRotation(previewView.display.rotation)
             .build()
+
 /*
         imageAnalysis = ImageAnalysis.Builder()
             .setTargetAspectRatio(AspectRatio.RATIO_16_9)
@@ -79,12 +80,13 @@ class ManaCameraX(
         })
 */
 
+
         val camera = cameraProvider.bindToLifecycle(
-            lifecycle,
-            cameraSelector,
-            imageCapture,
-            preview
-            //  imageAnalysis
+                lifecycle,
+                cameraSelector,
+                imageCapture,
+                preview
+                //          ,imageAnalysis
         )
     }
 
@@ -96,12 +98,14 @@ class ManaCameraX(
             .build()
         val scanner = BarcodeScanning.getClient(options)
         if (::inputImage.isInitialized) {
+            Log.d("ManaCameraX", "Формат снимка = ${inputImage.format}")
             val result = scanner.process(inputImage)
                 .addOnSuccessListener { barcodes ->
                     for (barcode in barcodes) {
                         when (barcode.valueType) {
                             Barcode.TYPE_TEXT -> {
                                 Log.d("ManaCameraX", "ТЕКСТ СКАНА = ${barcode.displayValue}")
+                                //ТЕКСТ СКАНА = t=20210315T180100&s=234.60&fn=9960440300119563&i=7611&fp=3036044891&n=1
                                 _qrCode.value = barcode.displayValue
                             }
                         }

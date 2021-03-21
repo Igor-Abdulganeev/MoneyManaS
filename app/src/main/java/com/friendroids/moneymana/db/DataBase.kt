@@ -7,6 +7,9 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.friendroids.moneymana.R
+import com.friendroids.moneymana.db.dao.BudgetParametersDAO
+import com.friendroids.moneymana.db.dao.CategoriesDAO
+import com.friendroids.moneymana.db.dao.ChecksDAO
 import com.friendroids.moneymana.db.models.*
 import java.util.*
 
