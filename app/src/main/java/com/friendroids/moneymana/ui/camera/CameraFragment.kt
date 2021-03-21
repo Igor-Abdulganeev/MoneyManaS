@@ -29,10 +29,8 @@ import com.friendroids.moneymana.ui.NavigationActivity
 import com.friendroids.moneymana.ui.presentation_models.Categorie
 import com.friendroids.moneymana.ui.presentation_models.Check
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 import java.util.concurrent.Executor
 
@@ -50,7 +48,7 @@ class CameraFragment : Fragment() {
     private var _listSpinner = MutableLiveData<List<ManaCategory>>()
     private val listSpinner: LiveData<List<ManaCategory>>
         get() = _listSpinner
-    private lateinit var listAdapter: SpinAdapter
+    private lateinit var listAdapter: CameraSpinAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -67,13 +65,12 @@ class CameraFragment : Fragment() {
             binding.root
         }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         repoIn = ManaRepositoryImpl(DataBase.getInstance(requireContext().applicationContext))
         val currentDate = Date()
-        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
         val date = dateFormat.format(currentDate)
         binding.dateTextedit.setText(date)
         executor = ContextCompat.getMainExecutor(requireContext())
@@ -86,6 +83,15 @@ class CameraFragment : Fragment() {
             val sum = binding.moneyTextedit.text.toString()
             try {
                 if (sum.toDouble() != 0.00) {
+                    /*
+                        repoOut = PurchaseDB(requireContext())
+                        viewLifecycleOwner.lifecycleScope
+                                .launch {
+                            appendCheck()
+                        }
+
+    */
+
                     viewLifecycleOwner.lifecycleScope.launch {
                         repoOut = PurchaseDB(requireContext())
                         val date = binding.dateTextedit.text.toString()
@@ -118,6 +124,11 @@ class CameraFragment : Fragment() {
         }
     }
 
+    private fun appendCheck() {
+        val date = binding.dateTextedit.text.toString()
+
+    }
+
     override fun onResume() {
         super.onResume()
         navigationActivity?.setImageResource(R.drawable.add_shopping_24)
@@ -130,8 +141,8 @@ class CameraFragment : Fragment() {
                 val list = it.split("&")
                 val dateCheck = "${list[0].subSequence(8, 10)}.${
                     list[0].subSequence(
-                        6,
-                        8
+                            6,
+                            8
                     )
                 }.${list[0].subSequence(2, 6)}"
                 val sum = list[1].substring(2)
@@ -144,7 +155,7 @@ class CameraFragment : Fragment() {
 
     private fun bindSpinner() {
         listSpinner.observe(viewLifecycleOwner, {
-            listAdapter = SpinAdapter(requireContext(), it)
+            listAdapter = CameraSpinAdapter(requireContext(), it)
             binding.categorySpinner.adapter = listAdapter
         })
 /*
@@ -170,29 +181,4 @@ class CameraFragment : Fragment() {
         }
     }
 
-    private class SpinAdapter(
-        private val contextMain: Context,
-        private val arrayCategory: List<ManaCategory>
-    ) :
-        ArrayAdapter<ManaCategory>(contextMain, R.layout.item_category, arrayCategory) {
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            return getItemsView(position, convertView, parent)
-        }
-
-        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
-            return getItemsView(position, convertView, parent)
-        }
-
-        private fun getItemsView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val inflater = LayoutInflater.from(contextMain)
-            val row: View = inflater.inflate(R.layout.item_category, parent, false)
-            val nameCategory = row.findViewById<TextView>(R.id.category_name_text)
-            val imageCategory = row.findViewById<ImageView>(R.id.category_image)
-
-            imageCategory.setImageResource(arrayCategory[position].imageId)
-            nameCategory.text = arrayCategory[position].title
-
-            return row
-        }
-    }
 }
