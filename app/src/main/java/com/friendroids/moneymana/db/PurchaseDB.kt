@@ -1,22 +1,16 @@
 package com.friendroids.moneymana.db
 
 import android.content.Context
-import com.friendroids.moneymana.db.models.BudgetParameterCategorie
+import com.friendroids.moneymana.db.models.BudgetParameterCategory
 import com.friendroids.moneymana.db.models.BudgetParameterEntity
-import com.friendroids.moneymana.db.models.CategorieEntity
-import com.friendroids.moneymana.db.models.CheckCategorie
+import com.friendroids.moneymana.db.models.CategoryEntity
 import com.friendroids.moneymana.db.models.CheckEntity
 import com.friendroids.moneymana.ui.presentation_models.BudgetParameter
-import com.friendroids.moneymana.ui.presentation_models.Categorie
+import com.friendroids.moneymana.ui.presentation_models.Category
 import com.friendroids.moneymana.ui.presentation_models.Check
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
-import java.util.Calendar
-import java.util.Date
 
 class PurchaseDB(applicationContext: Context) {
     private val purchaseDB = DataBase.create(applicationContext)
@@ -28,11 +22,12 @@ class PurchaseDB(applicationContext: Context) {
     }*/
 
     suspend fun updateCategorieInDB(categorie: ManaCategory): Boolean =
-        withContext(Dispatchers.IO) {
-            toCategorieEntity(categorie)?.let { purchaseDB.categoriesDAO.insert(it) }
-            true
-        }
+            withContext(Dispatchers.IO) {
+                toCategorieEntity(categorie)?.let { purchaseDB.categoriesDAO.insert(it) }
+                true
+            }
 
+/*
     fun loadBudgetParameters(dateBudget: Date): Flow<List<BudgetParameter>> = flow {
         val c = Calendar.getInstance()
         c.time = dateBudget
@@ -42,13 +37,15 @@ class PurchaseDB(applicationContext: Context) {
                     emit(lBPC.map { toBudgetParameter(it) })
                 }
     }
+*/
 
     suspend fun updateBudgetParametersInDB(budgetParameter: BudgetParameter): Boolean =
-        withContext(Dispatchers.IO) {
-            purchaseDB.budgetParametersDAO.insert(toBudgetParameterEntity(budgetParameter))
-            true
-        }
+            withContext(Dispatchers.IO) {
+                purchaseDB.budgetParametersDAO.insert(toBudgetParameterEntity(budgetParameter))
+                true
+            }
 
+/*
     fun loadChecks(dateBudget: Date, categorie: Categorie): Flow<List<Check>> = flow {
         val c = Calendar.getInstance()
         c.time = dateBudget
@@ -58,51 +55,53 @@ class PurchaseDB(applicationContext: Context) {
                     emit(lCC.map { toCheck(it) })
                 }
     }
+*/
 
-    suspend fun updateCheckInDB(check: Check, dateBudget: Date): Boolean =
-        withContext(Dispatchers.IO) {
-            val c = Calendar.getInstance()
-            c.time = dateBudget
-            c.add(Calendar.MONTH, 1)
+    suspend fun insertCheckInDb(check: Check) = withContext(Dispatchers.IO) {
+        purchaseDB.checksDAO.insert(toCheckEntity(check = check))
+    }
 /*
-            purchaseDB.checksDAO.getCheckById(check.id)?.let {
+    suspend fun updateCheckInDB(check: Check, dateBudget: Date): Boolean =
+            withContext(Dispatchers.IO) {
+                val c = Calendar.getInstance()
+                c.time = dateBudget
+                c.add(Calendar.MONTH, 1)
+                purchaseDB.checksDAO.getCheckById(check.id)?.let {
+                    purchaseDB.budgetParametersDAO.getBudgetParameterByDateCategorie(
+                            dateBudget,
+                            c.time,
+                            check.categorie.id
+                    )?.let {
+                        purchaseDB.budgetParametersDAO.insert(
+                                BudgetParameterEntity(
+                                        it._id,
+                                        it.categorieId,
+                                        it.dateBudget,
+                                        it.summaPlan,
+                                        it.summaFact - check.summa
+                                )
+                        )
+                    }
+                }
+                purchaseDB.checksDAO.insert(toCheckEntity(check))
                 purchaseDB.budgetParametersDAO.getBudgetParameterByDateCategorie(
-                    dateBudget,
-                    c.time,
-                    check.categorie.id
+                        dateBudget,
+                        c.getTime(),
+                        check.categorie.id
                 )?.let {
                     purchaseDB.budgetParametersDAO.insert(
-                        BudgetParameterEntity(
-                            it._id,
-                            it.categorieId,
-                            it.dateBudget,
-                            it.summaPlan,
-                            it.summaFact - check.summa
-                        )
+                            BudgetParameterEntity(
+                                    it._id,
+                                    it.categorieId,
+                                    it.dateBudget,
+                                    it.summaPlan,
+                                    it.summaFact + check.summa
+                            )
                     )
                 }
+                true
             }
 */
-            purchaseDB.checksDAO.insert(toCheckEntity(check))
-/*
-            purchaseDB.budgetParametersDAO.getBudgetParameterByDateCategorie(
-                dateBudget,
-                c.getTime(),
-                check.categorie.id
-            )?.let {
-                purchaseDB.budgetParametersDAO.insert(
-                    BudgetParameterEntity(
-                        it._id,
-                        it.categorieId,
-                        it.dateBudget,
-                        it.summaPlan,
-                        it.summaFact + check.summa
-                    )
-                )
-            }
-*/
-            true
-        }
 
 //    private fun toCategorie(categorieEntity: CategorieEntity): Categorie {
 //        return categorieEntity?.let { categorieEntity ->
@@ -112,54 +111,59 @@ class PurchaseDB(applicationContext: Context) {
 //        }
 //    }
 
+/*
     private fun toCheck(checkCategory: CheckCategorie): Check {
         return checkCategory.let { checkCategory ->
             with(checkCategory) {
                 Check(
-                        id = _id,
+                        id = _id.toLong(),
                         dateCheck = dateCheck,
-                        summa = summa,
+                        sumCheck = summa,
                         categorie = Categorie(categorieId, categorieImageId, categorieTitle)
                 )
             }
         }
     }
+*/
 
-    private fun toBudgetParameter(budgetParameterCategorie: BudgetParameterCategorie) =
-        BudgetParameter(
-            id = budgetParameterCategorie._id,
-            dateBudget = budgetParameterCategorie.dateBudget,
-            categorie = Categorie(
-                budgetParameterCategorie.categorieId,
-                budgetParameterCategorie.categorieImageId,
-                budgetParameterCategorie.categorieTitle
-            ),
-            summaPlan = budgetParameterCategorie.summaPlan,
-            summaFact = budgetParameterCategorie.summaFact
-        )
+    private fun toBudgetParameter(budgetParameterCategory: BudgetParameterCategory) =
+            BudgetParameter(
+                    id = budgetParameterCategory._id,
+                    dateBudget = budgetParameterCategory.dateBudget,
+                    category = Category(
+                            id = budgetParameterCategory.idCategory,
+                            imageId = budgetParameterCategory.imageIdCategory,
+                            title = budgetParameterCategory.titleCategory
+                    ),
+                    sumBudget = budgetParameterCategory.sumBudget,
+                    sumFact = budgetParameterCategory.sumFact
+            )
 
     private fun toBudgetParameterEntity(budgetParameter: BudgetParameter) = BudgetParameterEntity(
-        _id = budgetParameter.id,
-        categorieId = budgetParameter.categorie.id,
-        dateBudget = budgetParameter.dateBudget,
-        summaPlan = budgetParameter.summaPlan,
-        summaFact = budgetParameter.summaFact
+            _id = budgetParameter.id,
+            idCategory = budgetParameter.category.id,
+            dateBudget = budgetParameter.dateBudget,
+            sumBudget = budgetParameter.sumBudget,
+            sumFact = budgetParameter.sumFact
     )
 
     private fun toCategorieEntity(categorie: ManaCategory) = categorie.id?.let {
-        CategorieEntity(
-            _id = it,
-            title = categorie.title,
-            imageId = categorie.imageId,
-            maxSum = categorie.maxSum,
-            sumRemained = categorie.sumRemained
+        CategoryEntity(
+                _id = it,
+                title = categorie.title,
+                imageId = categorie.imageId,
+                sumMaximum = categorie.sumMaximum,
+                sumRemained = categorie.sumRemained
         )
     }
 
     private fun toCheckEntity(check: Check) = CheckEntity(
-        _id = check.id,
-        categorieId = check.categorie.id,
-        dateCheck = check.dateCheck,
-        summa = check.summa
+            id = check.id,
+            idCategory = check.category.id.toLong(),
+            dateCheck = check.dateCheck,
+            sumCheck = check.sumCheck,
+            fnCheck = check.fnCheck,
+            iCheck = check.iCheck,
+            fpCheck = check.fpCheck
     )
 }

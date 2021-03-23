@@ -100,10 +100,10 @@ class AddCategoryDialog : DialogFragment() {
 
     private fun setupNewCategory() =
         ManaCategory(
-            title = binding.categoryTitleEditText.text.toString(),
-            sumRemained = binding.sumLimitEditText.text.toString().toInt(),
-            maxSum = binding.sumLimitEditText.text.toString().toInt(),
-            imageId = adapter.idSave
+                title = binding.categoryTitleEditText.text.toString(),
+                sumRemained = binding.sumLimitEditText.text.toString().toInt(),
+                sumMaximum = binding.sumLimitEditText.text.toString().toInt(),
+                imageId = adapter.idSave
         )
 
     private fun updateDataBase(newCategory: ManaCategory) {

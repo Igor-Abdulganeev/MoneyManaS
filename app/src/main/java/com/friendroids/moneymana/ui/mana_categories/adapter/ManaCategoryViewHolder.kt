@@ -1,6 +1,5 @@
 package com.friendroids.moneymana.ui.mana_categories.adapter
 
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.friendroids.moneymana.R
 import com.friendroids.moneymana.databinding.ItemManaBinding
@@ -16,7 +15,7 @@ class ManaCategoryViewHolder(
             itemManaNameTextView.text = manaCategory.title
             itemManaImageView.setImageResource(manaCategory.imageId)
             itemManaCustomProgressBar.progress = manaCategory.percentRemained
-            itemManaSumLimitTextView.text = manaCategory.maxSum.toString()
+            itemManaSumLimitTextView.text = manaCategory.sumMaximum.toString()
             if (manaCategory.sumRemained >= 0) {
                 itemManaSumRemainedTextView.text =
                     itemView.context.getString(R.string.sum_remained, manaCategory.sumRemained)

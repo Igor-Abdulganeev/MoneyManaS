@@ -29,7 +29,7 @@ class CheckViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val dateAndSumma: TextView = itemView.findViewById(R.id.item_check_text_view)
 
     fun bind(checkEntity: CheckEntity) {
-        dateAndSumma.text = "${checkEntity.dateCheck} - ${checkEntity.summa}"
+        dateAndSumma.text = "${checkEntity.dateCheck} - ${checkEntity.sumCheck}"
     }
 
 }

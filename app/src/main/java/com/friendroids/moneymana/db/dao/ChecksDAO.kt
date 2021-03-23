@@ -4,18 +4,16 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.friendroids.moneymana.db.models.CheckCategorie
 import com.friendroids.moneymana.db.models.CheckEntity
 import kotlinx.coroutines.flow.Flow
-import java.util.*
 
 @Dao
 interface ChecksDAO {
     @Query("SELECT * FROM checks ORDER BY _id ASC")
     fun getAll(): Flow<List<CheckEntity>>
 
-    @Query("SELECT * FROM checks WHERE categorieId == :idCategory ORDER BY _id ASC")
-    fun getAlltoCategory(idCategory: Int): Flow<List<CheckEntity>>
+    @Query("SELECT * FROM checks WHERE id_category == :idCategory ORDER BY _id ASC")
+    fun getAllFromCategory(idCategory: Int): Flow<List<CheckEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(checkEntity: CheckEntity)
@@ -32,8 +30,10 @@ interface ChecksDAO {
     @Query("SELECT * FROM checks WHERE _id == :id")
     fun getCheckById(id: Int): CheckEntity
 
+
+/*
     @Query(
-        "SELECT checks.*, categories.title AS categorietitle, categories.image AS categorieimageid " +
+        "SELECT checks.*, categories.title AS category_title, categories.image AS category_image " +
                 "FROM checks, categories " +
                 "WHERE checks.categorieid = categories._id " +
                 "AND (checks.datecheck between :dateStart and :dateEnd) AND checks.categorieid = :categorieId"
@@ -43,4 +43,6 @@ interface ChecksDAO {
         dateEnd: Date,
         categorieId: Int
     ): Flow<List<CheckCategorie>>
+*/
+
 }

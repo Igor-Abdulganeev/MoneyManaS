@@ -1,10 +1,11 @@
 package com.friendroids.moneymana.ui.presentation_models
 
-import java.util.*
-
 data class Check(
-        val id: Int,
-        val dateCheck: Date,
-        val categorie: Categorie,
-        val summa: Double
+        val id: Long,
+        val dateCheck: Long,
+        val category: Category,
+        val sumCheck: Double,
+        val fnCheck: Long,
+        val iCheck: Long,
+        val fpCheck: Long
 )
