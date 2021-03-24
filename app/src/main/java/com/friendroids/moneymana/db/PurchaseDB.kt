@@ -159,7 +159,7 @@ class PurchaseDB(applicationContext: Context) {
 
     private fun toCheckEntity(check: Check) = CheckEntity(
             id = check.id,
-            idCategory = check.category.id.toLong(),
+            idCategory = check.category.id,
             dateCheck = check.dateCheck,
             sumCheck = check.sumCheck,
             fnCheck = check.fnCheck,

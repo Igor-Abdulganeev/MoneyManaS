@@ -39,19 +39,6 @@ class CameraFragment : Fragment() {
     private lateinit var repoIn: ManaRepository
     private lateinit var repoOut: PurchaseDB
     private lateinit var scanningCheck: Check
-    /*= Check(
-            id = 0,
-            dateCheck = 0,
-            category = Category(
-                    id = 0,
-                    imageId = 0,
-                    title = ""
-            ),
-            sumCheck = 0.0,
-            fnCheck = 0,
-            iCheck = 0,
-            fpCheck = 0
-    )*/
 
     private var _listSpinner = MutableLiveData<List<ManaCategory>>()
     private val listSpinner: LiveData<List<ManaCategory>>
@@ -116,8 +103,8 @@ class CameraFragment : Fragment() {
                         iCheck = scanningCheck.iCheck
                         fpCheck = scanningCheck.fpCheck
                     }
-                    val check: Check = Check(
-                            id = 0,
+                    val check = Check(
+                            id = null,
                             dateCheck = dateToDB,
                             category = category,
                             sumCheck = scanSum,
@@ -138,7 +125,7 @@ class CameraFragment : Fragment() {
 
     private fun bindCamera() {
         cameraX = ManaCameraX(requireContext(), executor, binding.cameraView, viewLifecycleOwner)
-        cameraX.qrCode.observe(viewLifecycleOwner, Observer { qrc ->
+        cameraX.qrCode.observe(viewLifecycleOwner, { qrc ->
             qrc?.let {
                 //ТЕКСТ СКАНА = t=20210315T180100&s=234.60&fn=9960440300119563&i=7611&fp=3036044891&n=1
                 val list = it.split("&")
