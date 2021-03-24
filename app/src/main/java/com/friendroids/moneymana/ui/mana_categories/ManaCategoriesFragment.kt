@@ -22,7 +22,6 @@ import com.friendroids.moneymana.ui.settings.PrimarySettingsDialog
 import com.friendroids.moneymana.ui.settings.PrimarySettingsDialog.Companion.PRIMARY_SETTINGS_DIALOG
 
 class ManaCategoriesFragment : Fragment() {
-
     private var navigationActivity: NavigationActivity? = null
     private var _binding: FragmentManaCategoriesBinding? = null
     private val binding get() = _binding!!
@@ -75,8 +74,6 @@ class ManaCategoriesFragment : Fragment() {
             if (it.id!= null) {
                 navigationActivity?.openCategoryFragment(it.id)
             }
-
-
         }
         binding.manaRecyclerView.adapter = manaCategoriesAdapter
         with(binding) {

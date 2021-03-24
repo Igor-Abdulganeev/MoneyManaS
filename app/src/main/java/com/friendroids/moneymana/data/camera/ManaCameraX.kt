@@ -79,9 +79,7 @@ class ManaCameraX(
             }
         })
 */
-
-
-        val camera = cameraProvider.bindToLifecycle(
+        cameraProvider.bindToLifecycle(
                 lifecycle,
                 cameraSelector,
                 imageCapture,
@@ -99,7 +97,7 @@ class ManaCameraX(
         val scanner = BarcodeScanning.getClient(options)
         if (::inputImage.isInitialized) {
             Log.d("ManaCameraX", "Формат снимка = ${inputImage.format}")
-            val result = scanner.process(inputImage)
+            scanner.process(inputImage)
                 .addOnSuccessListener { barcodes ->
                     for (barcode in barcodes) {
                         when (barcode.valueType) {

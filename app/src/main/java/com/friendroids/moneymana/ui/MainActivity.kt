@@ -65,11 +65,11 @@ class MainActivity : AppCompatActivity(), NavigationActivity {
         binding.cameraButton.setImageResource(resId)
     }
 
-    override fun openCategoryFragment(idCategory: Int) {
+    override fun openCategoryFragment(idCategory: Long) {
         supportFragmentManager.beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.container, ManaCategoryFragment.newInstance(idCategory), MAIN_FRAGMENT)
-            .commit()
+                .addToBackStack(null)
+                .replace(R.id.container, ManaCategoryFragment.newInstance(idCategory), MAIN_FRAGMENT)
+                .commit()
     }
 
     override fun onRequestPermissionsResult(

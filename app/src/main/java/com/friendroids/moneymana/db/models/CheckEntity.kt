@@ -5,24 +5,25 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.friendroids.moneymana.db.DBContract
-import java.util.*
-
 
 @Entity(
         tableName = DBContract.Checks.TABLE_NAME,
-        //  indices = [Index(DBContract.Checks.COLUMN_NAME_ID)]
+        indices = [Index(DBContract.Checks.COLUMN_NAME_ID)]
 )
 class CheckEntity(
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_ID)
-        val _id: Int? = null,
-
-        @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_CATEGORIE_ID)
-        val categorieId: Int,
-
-        @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_DATE_CHECK)
-        val dateCheck: Date,
-
-        @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_SUMMA)
-        val summa: Double
+        val id: Long? = null,
+        @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_ID_CATEGORY)
+        val idCategory: Long,
+        @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_DATE)
+        val dateCheck: Long,
+        @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_SUM)
+        val sumCheck: Double,
+        @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_FN)
+        val fnCheck: Long,
+        @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_I)
+        val iCheck: Long,
+        @ColumnInfo(name = DBContract.Checks.COLUMN_NAME_FP)
+        val fpCheck: Long
 )

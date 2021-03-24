@@ -62,7 +62,6 @@ class ManaCategoryFragment : Fragment(R.layout.fragment_mana_category_info) {
         fragmentCategoryViewModel.manaChecks.observe(this.viewLifecycleOwner, this::updCategory)
     }
 
-
     private fun loadData() {
         val categoryId = requireNotNull(arguments?.getInt(CATEGORY_ID_KEY))
         fragmentCategoryViewModel.updateManaProgress(categoryId)
@@ -93,9 +92,9 @@ class ManaCategoryFragment : Fragment(R.layout.fragment_mana_category_info) {
 
     companion object {
         private const val CATEGORY_ID_KEY = "id_category"
-        fun newInstance(idCategory: Int) = ManaCategoryFragment().apply {
+        fun newInstance(idCategory: Long) = ManaCategoryFragment().apply {
             arguments = Bundle().apply {
-                putInt(CATEGORY_ID_KEY, idCategory)
+                putLong(CATEGORY_ID_KEY, idCategory)
             }
         }
     }

@@ -1,17 +1,9 @@
 package com.friendroids.moneymana.db.models
 
 import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
 import com.friendroids.moneymana.db.DBContract
 
-@Entity(
-        tableName = DBContract.BudgetParameters.TABLE_NAME,
-        indices = [Index(DBContract.BudgetParameters.COLUMN_NAME_ID)]
-)
-class BudgetParameterEntity(
-        @PrimaryKey(autoGenerate = true)
+class BudgetParameterCategory(
         @ColumnInfo(name = DBContract.BudgetParameters.COLUMN_NAME_ID)
         val _id: Long,
         @ColumnInfo(name = DBContract.BudgetParameters.COLUMN_NAME_ID_CATEGORY)
@@ -21,5 +13,9 @@ class BudgetParameterEntity(
         @ColumnInfo(name = DBContract.BudgetParameters.COLUMN_NAME_SUM_BUDGET)
         val sumBudget: Double,
         @ColumnInfo(name = DBContract.BudgetParameters.COLUMN_NAME_SUM_FACT)
-        val sumFact: Double
+        val sumFact: Double,
+        @ColumnInfo(name = DBContract.Categories.COLUMN_NAME_TITLE)
+        val titleCategory: String,
+        @ColumnInfo(name = DBContract.Categories.COLUMN_NAME_ID_IMAGE)
+        val imageIdCategory: Int
 )
