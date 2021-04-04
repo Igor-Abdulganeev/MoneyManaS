@@ -11,20 +11,19 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.friendroids.moneymana.R
 import com.friendroids.moneymana.data.camera.ManaCameraX
-import com.friendroids.moneymana.data.repository.ManaRepositoryImpl
+import com.friendroids.moneymana.data.repository.ManaCategoriesRepositoryImpl
 import com.friendroids.moneymana.databinding.FragmentCameraBinding
-import com.friendroids.moneymana.db.DataBase
-import com.friendroids.moneymana.db.PurchaseDB
-import com.friendroids.moneymana.domain.repository.ManaRepository
+import com.friendroids.moneymana.db.ManaDatabase
+import com.friendroids.moneymana.domain.repository.ManaCategoriesRepository
 import com.friendroids.moneymana.ui.NavigationActivity
 import com.friendroids.moneymana.ui.presentation_models.Category
 import com.friendroids.moneymana.ui.presentation_models.Check
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
 import com.friendroids.moneymana.utils.extensions.DateTimeConverter
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.concurrent.Executor
 
@@ -36,8 +35,7 @@ class CameraFragment : Fragment() {
 
     private lateinit var cameraX: ManaCameraX
     private lateinit var executor: Executor
-    private lateinit var repoIn: ManaRepository
-    private lateinit var repoOut: PurchaseDB
+    private lateinit var categoriesRepository: ManaCategoriesRepository
     private lateinit var scanningCheck: Check
 
     private var _listSpinner = MutableLiveData<List<ManaCategory>>()
@@ -63,7 +61,8 @@ class CameraFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        repoIn = ManaRepositoryImpl(DataBase.getInstance(requireContext().applicationContext))
+        categoriesRepository =
+            ManaCategoriesRepositoryImpl(ManaDatabase.getInstance(requireContext().applicationContext))
         binding.dateTextedit.setText(DateTimeConverter().setCurrentDateTimeToString())
         executor = ContextCompat.getMainExecutor(requireContext())
         bindCamera()
@@ -75,7 +74,7 @@ class CameraFragment : Fragment() {
             val sum = binding.moneyTextedit.text.toString()
             try {
                 if (sum.toDouble() != 0.00) {
-                    repoOut = PurchaseDB(requireContext())
+//                    repoOut = PurchaseDB(requireContext())
                     appendCheck()
                 }
             } catch (e: Exception) {
@@ -94,7 +93,8 @@ class CameraFragment : Fragment() {
                     Log.d(TAG, "sum2 = $scanSum")
                     val selectedSpin = binding.categorySpinner.selectedItem as ManaCategory
                     val dateToDB = DateTimeConverter().setDateTimeStringToLong(scanDate)
-                    val category = Category(selectedSpin.id!!, selectedSpin.imageId, selectedSpin.title)
+                    val category =
+                        Category(selectedSpin.id, selectedSpin.imageId, selectedSpin.title)
                     var fnCheck = 0L
                     var iCheck = 0L
                     var fpCheck = 0L
@@ -104,16 +104,16 @@ class CameraFragment : Fragment() {
                         fpCheck = scanningCheck.fpCheck
                     }
                     val check = Check(
-                            id = null,
-                            dateCheck = dateToDB,
-                            category = category,
-                            sumCheck = scanSum,
-                            fnCheck = fnCheck,
-                            iCheck = iCheck,
-                            fpCheck = fpCheck
+                        id = null,
+                        dateCheck = dateToDB,
+                        category = category,
+                        sumCheck = scanSum,
+                        fnCheck = fnCheck,
+                        iCheck = iCheck,
+                        fpCheck = fpCheck
                     )
-                    Log.d(TAG, "$dateToDB=${category.id}=${category.imageId}=${category.title}=$scanSum")
-                    repoOut.insertCheckInDb(check = check)
+//                    Log.d(TAG, "$dateToDB=${category.id}=${category.imageId}=${category.title}=$scanSum")
+                    categoriesRepository.insertCheck(check = check)
                     activity?.onBackPressed()
                 }
     }
@@ -172,7 +172,9 @@ class CameraFragment : Fragment() {
 
     private fun getCategoryList() {
         viewLifecycleOwner.lifecycleScope.launch {
-            _listSpinner.value = repoIn.getListCategory()
+            categoriesRepository.getListCategory().collect {
+                _listSpinner.value = it
+            }
         }
     }
 

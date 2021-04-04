@@ -16,7 +16,7 @@ class PrimarySettingsViewModel(private val settingsRepository: SettingsRepositor
 
     init {
         viewModelScope.launch {
-            settingsRepository.getPrimaryBudgetSettings().collect {
+            settingsRepository.getBudget(4, 2021).collect {
                 _settings.value = it
             }
         }
@@ -24,7 +24,7 @@ class PrimarySettingsViewModel(private val settingsRepository: SettingsRepositor
 
     fun updateSettings(settings: TotalBudgetEntity) {
         viewModelScope.launch {
-            settingsRepository.updatePrimaryBudgetSettings(settings)
+            settingsRepository.setBudget(settings)
         }
     }
 }

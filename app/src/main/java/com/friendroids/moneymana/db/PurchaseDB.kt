@@ -1,11 +1,10 @@
 package com.friendroids.moneymana.db
+/*
 
 import android.content.Context
-import com.friendroids.moneymana.db.models.BudgetParameterCategory
-import com.friendroids.moneymana.db.models.BudgetParameterEntity
 import com.friendroids.moneymana.db.models.CategoryEntity
 import com.friendroids.moneymana.db.models.CheckEntity
-import com.friendroids.moneymana.ui.presentation_models.BudgetParameter
+import com.friendroids.moneymana.ui.presentation_models.TotalBudget
 import com.friendroids.moneymana.ui.presentation_models.Category
 import com.friendroids.moneymana.ui.presentation_models.Check
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
@@ -13,7 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class PurchaseDB(applicationContext: Context) {
-    private val purchaseDB = DataBase.create(applicationContext)
+    private val purchaseDB = ManaDatabase.create(applicationContext)
+*/
 
     /*suspend fun loadCategories(): Flow<List<Categorie>> = flow {
         purchaseDB.categoriesDAO.getAll().collect { categorieEntity ->
@@ -21,11 +21,13 @@ class PurchaseDB(applicationContext: Context) {
         }
     }*/
 
+/*
     suspend fun updateCategorieInDB(categorie: ManaCategory): Boolean =
             withContext(Dispatchers.IO) {
                 toCategorieEntity(categorie)?.let { purchaseDB.categoriesDAO.insert(it) }
                 true
             }
+*/
 
 /*
     fun loadBudgetParameters(dateBudget: Date): Flow<List<BudgetParameter>> = flow {
@@ -39,11 +41,13 @@ class PurchaseDB(applicationContext: Context) {
     }
 */
 
-    suspend fun updateBudgetParametersInDB(budgetParameter: BudgetParameter): Boolean =
+/*
+    suspend fun updateBudgetParametersInDB(totalBudget: TotalBudget): Boolean =
             withContext(Dispatchers.IO) {
-                purchaseDB.budgetParametersDAO.insert(toBudgetParameterEntity(budgetParameter))
+                purchaseDB.budgetParametersDAO.insert(toBudgetParameterEntity(totalBudget))
                 true
             }
+*/
 
 /*
     fun loadChecks(dateBudget: Date, categorie: Categorie): Flow<List<Check>> = flow {
@@ -57,9 +61,11 @@ class PurchaseDB(applicationContext: Context) {
     }
 */
 
-    suspend fun insertCheckInDb(check: Check) = withContext(Dispatchers.IO) {
+/*
+    suspend fun insertCheck(check: Check) = withContext(Dispatchers.IO) {
         purchaseDB.checksDAO.insert(toCheckEntity(check = check))
     }
+*/
 /*
     suspend fun updateCheckInDB(check: Check, dateBudget: Date): Boolean =
             withContext(Dispatchers.IO) {
@@ -126,8 +132,9 @@ class PurchaseDB(applicationContext: Context) {
     }
 */
 
+/*
     private fun toBudgetParameter(budgetParameterCategory: BudgetParameterCategory) =
-            BudgetParameter(
+            TotalBudget(
                     id = budgetParameterCategory._id,
                     dateBudget = budgetParameterCategory.dateBudget,
                     category = Category(
@@ -139,12 +146,12 @@ class PurchaseDB(applicationContext: Context) {
                     sumFact = budgetParameterCategory.sumFact
             )
 
-    private fun toBudgetParameterEntity(budgetParameter: BudgetParameter) = BudgetParameterEntity(
-            _id = budgetParameter.id,
-            idCategory = budgetParameter.category.id,
-            dateBudget = budgetParameter.dateBudget,
-            sumBudget = budgetParameter.sumBudget,
-            sumFact = budgetParameter.sumFact
+    private fun toBudgetParameterEntity(totalBudget: TotalBudget) = BudgetParameterEntity(
+            _id = totalBudget.id,
+            idCategory = totalBudget.category.id,
+            dateBudget = totalBudget.dateBudget,
+            sumBudget = totalBudget.sumBudget,
+            sumFact = totalBudget.sumFact
     )
 
     private fun toCategorieEntity(categorie: ManaCategory) = categorie.id?.let {
@@ -157,13 +164,16 @@ class PurchaseDB(applicationContext: Context) {
         )
     }
 
+*/
+/*
     private fun toCheckEntity(check: Check) = CheckEntity(
             id = check.id,
-            idCategory = check.category.id,
+            idCategory = check.category.id!!,
             dateCheck = check.dateCheck,
             sumCheck = check.sumCheck,
             fnCheck = check.fnCheck,
             iCheck = check.iCheck,
             fpCheck = check.fpCheck
     )
-}
+*/
+//}

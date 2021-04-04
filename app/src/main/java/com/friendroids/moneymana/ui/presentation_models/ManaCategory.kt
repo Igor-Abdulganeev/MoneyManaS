@@ -3,11 +3,11 @@ package com.friendroids.moneymana.ui.presentation_models
 import com.friendroids.moneymana.R
 
 data class ManaCategory(
-        val id: Long? = null,
-        val title: String,
-        val sumRemained: Int,
-        val sumMaximum: Int,
-        val imageId: Int = R.drawable.adjust
+    val id: Long,
+    val title: String,
+    val sumRemained: Int,
+    val sumMaximum: Int,
+    val imageId: Int = R.drawable.beaker_check
 ) {
     val percentRemained: Int = sumRemained.getPercentage()
     val status: Int = when (percentRemained) {
@@ -16,5 +16,5 @@ data class ManaCategory(
         else -> R.color.pale_red
     }
 
-    private fun Int.getPercentage() = times(100).div(sumMaximum)
+    private fun Int.getPercentage() = times(100).div(if (sumMaximum != 0) sumMaximum else 1)
 }

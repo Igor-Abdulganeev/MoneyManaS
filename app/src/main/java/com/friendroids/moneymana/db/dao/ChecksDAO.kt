@@ -9,26 +9,37 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ChecksDAO {
-    @Query("SELECT * FROM checks ORDER BY _id ASC")
-    fun getAll(): Flow<List<CheckEntity>>
+    @Query("SELECT * FROM checks ORDER BY id ASC")
+    fun getAllCheck(): Flow<List<CheckEntity>>
+    //ManaRepositoryImpl
 
-    @Query("SELECT * FROM checks WHERE id_category == :idCategory ORDER BY _id ASC")
+    @Query("SELECT * FROM checks WHERE id_category == :idCategory ORDER BY id ASC")
     fun getAllFromCategory(idCategory: Int): Flow<List<CheckEntity>>
+    //ManaFragmentCategoryRepository
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(checkEntity: CheckEntity)
+    //PurchaseDB
 
+/*
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(checkEntityList: List<CheckEntity>)
+*/
 
-    @Query("DELETE FROM checks WHERE _id == :id")
+/*
+    @Query("DELETE FROM checks WHERE id == :id")
     suspend fun deleteById(id: Long)
+*/
 
+/*
     @Query("DELETE FROM checks")
     suspend fun deleteAll()
+*/
 
-    @Query("SELECT * FROM checks WHERE _id == :id")
+/*
+    @Query("SELECT * FROM checks WHERE id == :id")
     fun getCheckById(id: Int): CheckEntity
+*/
 
 
 /*

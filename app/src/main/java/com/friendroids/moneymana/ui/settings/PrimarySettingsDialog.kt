@@ -11,8 +11,7 @@ import androidx.fragment.app.viewModels
 import com.friendroids.moneymana.R
 import com.friendroids.moneymana.data.repository.SettingsRepositoryImpl
 import com.friendroids.moneymana.databinding.DialogPrimarySettingsBinding
-import com.friendroids.moneymana.db.DBContract.TotalBudget.TOTAL_BUDGET_PRIMARY_KEY
-import com.friendroids.moneymana.db.DataBase
+import com.friendroids.moneymana.db.ManaDatabase
 import com.friendroids.moneymana.db.models.TotalBudgetEntity
 import com.friendroids.moneymana.ui.settings.viewmodel.PrimarySettingsViewModel
 import com.friendroids.moneymana.ui.settings.viewmodel.PrimarySettingsViewModelFactory
@@ -24,7 +23,7 @@ class PrimarySettingsDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val viewModel: PrimarySettingsViewModel by viewModels {
         PrimarySettingsViewModelFactory(
-            SettingsRepositoryImpl(DataBase.getInstance(requireContext().applicationContext))
+            SettingsRepositoryImpl(ManaDatabase.getInstance(requireContext().applicationContext))
         )
     }
 
@@ -45,11 +44,11 @@ class PrimarySettingsDialog : DialogFragment() {
         )
         initViews()
         viewModel.settings.observe(viewLifecycleOwner, {
-            if (it!= null){
-                if (it.sum != 0) {
-                    binding.totalAmountEditText.setText(it.sum.toString())
+            if (it != null) {
+                if (it.sumBudget != 0) {
+                    binding.totalAmountEditText.setText(it.sumBudget.toString())
                 }
-                binding.revertPeriodEditText.setText(it.daysTillRestartCount.toString())
+                binding.revertPeriodEditText.setText(it.dayRestart.toString())
             }
 
         })
@@ -74,7 +73,10 @@ class PrimarySettingsDialog : DialogFragment() {
     private fun validateButton() {
         with(binding) {
             saveSettingsButton.isEnabled =
-                totalAmountEditText.text?.isNotBlank() == true && revertPeriodEditText.text?.isNotBlank() == true
+                totalAmountEditText.text?.isNotBlank() == true
+                        && revertPeriodEditText.text?.isNotBlank() == true
+                        && revertPeriodEditText.text.toString().toInt() > 0
+                        && revertPeriodEditText.text.toString().toInt() < 32
             if (saveSettingsButton.isEnabled) saveSettingsButton.changeColor(
                     requireContext(),
                     R.color.primaryColor
@@ -88,9 +90,11 @@ class PrimarySettingsDialog : DialogFragment() {
     }
 
     private fun changePrimarySettings() = TotalBudgetEntity(
-        id = TOTAL_BUDGET_PRIMARY_KEY,
-        sum = binding.totalAmountEditText.text.toString().toInt(),
-        daysTillRestartCount = binding.revertPeriodEditText.text.toString().toInt()
+        id = null,
+        month = 4,
+        year = 2021,
+        dayRestart = binding.revertPeriodEditText.text.toString().toInt(),
+        sumBudget = binding.totalAmountEditText.text.toString().toInt()
     )
 
     companion object {

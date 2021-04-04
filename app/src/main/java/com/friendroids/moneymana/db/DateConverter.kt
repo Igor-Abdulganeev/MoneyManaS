@@ -1,5 +1,6 @@
 package com.friendroids.moneymana.db
 
+/*
 import androidx.room.TypeConverter
 import java.util.*
 
@@ -13,4 +14,4 @@ class DateConverter {
     fun fromDate(date: Date?): Long? {
         return date?.time
     }
-}
+}*/

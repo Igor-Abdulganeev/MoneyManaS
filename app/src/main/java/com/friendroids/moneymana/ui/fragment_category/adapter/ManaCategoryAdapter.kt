@@ -1,5 +1,6 @@
 package com.friendroids.moneymana.ui.fragment_category.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ class ManaCategoryAdapter(private var checksEntity: List<CheckEntity>) :
 class CheckViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val dateAndSumma: TextView = itemView.findViewById(R.id.item_check_text_view)
 
+    @SuppressLint("SetTextI18n")
     fun bind(checkEntity: CheckEntity) {
         dateAndSumma.text = "${checkEntity.dateCheck} - ${checkEntity.sumCheck}"
     }

@@ -12,13 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.friendroids.moneymana.R
 import com.friendroids.moneymana.data.repository.ManaFragmentCategoryRepository
-import com.friendroids.moneymana.data.repository.ManaRepositoryImpl
-import com.friendroids.moneymana.db.DataBase
+import com.friendroids.moneymana.db.ManaDatabase
 import com.friendroids.moneymana.db.models.CheckEntity
 import com.friendroids.moneymana.ui.fragment_category.adapter.ManaCategoryAdapter
 import com.friendroids.moneymana.ui.fragment_category.viewmodel.FragmentCategoryViewModel
 import com.friendroids.moneymana.ui.fragment_category.viewmodel.FragmentCategoryViewModelFactory
-import com.friendroids.moneymana.ui.presentation_models.ManaCategory
 import java.util.*
 
 class ManaCategoryFragment : Fragment(R.layout.fragment_mana_category_info) {
@@ -26,7 +24,7 @@ class ManaCategoryFragment : Fragment(R.layout.fragment_mana_category_info) {
     private var listener: ActionCategory? = null
     private val fragmentCategoryViewModel: FragmentCategoryViewModel by viewModels {
         FragmentCategoryViewModelFactory(
-            ManaFragmentCategoryRepository(DataBase.getInstance(requireContext().applicationContext))
+            ManaFragmentCategoryRepository(ManaDatabase.getInstance(requireContext().applicationContext))
         )
     }
 
@@ -70,7 +68,7 @@ class ManaCategoryFragment : Fragment(R.layout.fragment_mana_category_info) {
     private fun updCategory(checksEntity: List<CheckEntity>) {
 
         nameCategory.text = ""// manaCategory.title
-        imageCategory.setImageResource(R.drawable.food_fork_drink)
+        imageCategory.setImageResource(R.drawable.beaker_check)
         progressBarCategory.progress = 33
 
         val adapter = ManaCategoryAdapter(checksEntity)

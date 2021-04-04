@@ -1,4 +1,5 @@
 package com.friendroids.moneymana.ui.new_category
+/*
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.friendroids.moneymana.R
 import com.friendroids.moneymana.data.repository.ManaRepositoryImpl
 import com.friendroids.moneymana.databinding.DialogAddCategoryBinding
-import com.friendroids.moneymana.db.DataBase
+import com.friendroids.moneymana.db.ManaDatabase
 import com.friendroids.moneymana.ui.new_category.viewmodel.AddManaCategoryViewModel
 import com.friendroids.moneymana.ui.new_category.viewmodel.AddManaCategoryViewModelFactory
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
@@ -24,7 +25,7 @@ class AddCategoryDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val viewModel: AddManaCategoryViewModel by viewModels {
         AddManaCategoryViewModelFactory(
-            ManaRepositoryImpl(DataBase.getInstance(requireContext().applicationContext))
+            ManaRepositoryImpl(ManaDatabase.getInstance(requireContext().applicationContext))
         )
     }
 
@@ -114,3 +115,4 @@ class AddCategoryDialog : DialogFragment() {
         const val ADD_CATEGORY_DIALOG_TAG = "ADD_CATEGORY_DIALOG_TAG"
     }
 }
+*/

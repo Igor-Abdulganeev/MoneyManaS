@@ -1,5 +1,6 @@
 package com.friendroids.moneymana.ui.new_category
 
+/*
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -56,4 +57,4 @@ class AddCategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
         dateAndSumma.setImageResource(id)
         selectTextView.text = id.toString()
     }
-}
+}*/

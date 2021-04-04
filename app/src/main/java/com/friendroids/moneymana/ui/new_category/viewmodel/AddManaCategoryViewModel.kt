@@ -1,5 +1,6 @@
 package com.friendroids.moneymana.ui.new_category.viewmodel
 
+/*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.friendroids.moneymana.domain.repository.ManaRepository
@@ -13,4 +14,4 @@ class AddManaCategoryViewModel(private val manaRepository: ManaRepository) : Vie
             manaRepository.insertManaCategory(manaCategory)
         }
     }
-}
+}*/

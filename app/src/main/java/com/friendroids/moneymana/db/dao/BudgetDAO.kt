@@ -4,12 +4,12 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.friendroids.moneymana.db.models.BudgetParameterEntity
 import com.friendroids.moneymana.db.models.TotalBudgetEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface BudgetParametersDAO {
+interface BudgetDAO {
+/*
     @Query("SELECT * FROM budgetparameters ORDER BY _id ASC")
     suspend fun getAll(): List<BudgetParameterEntity>
 
@@ -24,6 +24,7 @@ interface BudgetParametersDAO {
 
     @Query("DELETE FROM budgetparameters")
     suspend fun deleteAll()
+*/
 
 /*
     @Query("SELECT * FROM budgetparameters WHERE (datebudget BETWEEN :dateStart AND :dateEnd) AND (categorieid = :categorie)")
@@ -43,8 +44,13 @@ interface BudgetParametersDAO {
     fun getBudgetParametersCByDate(dateStart: Date, dateEnd: Date): Flow<List<BudgetParameterCategorie>>
 */
 
-    @Query("SELECT * FROM total_budget WHERE id == :id")
-    fun getTotalBudget(id: String): Flow<TotalBudgetEntity>
+    @Query("SELECT * FROM total_budget WHERE month_budget = :month AND year_budget = :year")
+    fun getTotalBudget(month: Int, year: Int): Flow<TotalBudgetEntity>
+
+/*
+    @Query("SELECT * FROM total_budget WHERE MAX(id) LIMIT 1")
+    fun getLastTotalBudget(): Flow<TotalBudgetEntity>
+*/
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun updateTotalBudget(totalBudgetEntity: TotalBudgetEntity)

@@ -13,7 +13,6 @@ import com.friendroids.moneymana.databinding.ActivityMainBinding
 import com.friendroids.moneymana.ui.camera.CameraFragment
 import com.friendroids.moneymana.ui.fragment_category.ManaCategoryFragment
 import com.friendroids.moneymana.ui.mana_categories.ManaCategoriesFragment
-import com.friendroids.moneymana.ui.presentation_models.ManaCategory
 
 class MainActivity : AppCompatActivity(), NavigationActivity {
 

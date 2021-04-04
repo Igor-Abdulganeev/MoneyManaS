@@ -3,7 +3,7 @@
     <string name="camera_access_denyded_text">Для полноценной работы приложения необходимо разрешение на использовании камеры</string>
     <string name="add_category_name">Название категории</string>
     <string name="add_total_amount_name">Общий бюджет</string>
-    <string name="set_revert_period">Дней до рестарта</string>
+    <string name="set_revert_period">День рестарта</string>
     <string name="set_limit">Денежный лимит</string>
     <string name="save">Сохранить</string>
     <string name="sum_remained">остаток: %d</string>
