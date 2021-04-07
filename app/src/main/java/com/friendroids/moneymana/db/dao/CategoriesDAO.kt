@@ -28,5 +28,5 @@ interface CategoriesDAO {
     suspend fun deleteAll()
 
     @Query("SELECT * FROM categories WHERE _id == :id")
-    fun getCategoriesById(id: Int): CategoryEntity
+    fun getCategoriesById(id: Long): Flow<CategoryEntity>
 }

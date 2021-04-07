@@ -13,7 +13,7 @@ interface ChecksDAO {
     fun getAll(): Flow<List<CheckEntity>>
 
     @Query("SELECT * FROM checks WHERE id_category == :idCategory ORDER BY _id ASC")
-    fun getAllFromCategory(idCategory: Int): Flow<List<CheckEntity>>
+    fun getAllFromCategory(idCategory: Long): Flow<List<CheckEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(checkEntity: CheckEntity)

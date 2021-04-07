@@ -1,6 +1,5 @@
 package com.friendroids.moneymana.ui.fragment_category
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -12,18 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.friendroids.moneymana.R
 import com.friendroids.moneymana.data.repository.ManaFragmentCategoryRepository
-import com.friendroids.moneymana.data.repository.ManaRepositoryImpl
 import com.friendroids.moneymana.db.DataBase
+import com.friendroids.moneymana.db.models.CategoryEntity
 import com.friendroids.moneymana.db.models.CheckEntity
 import com.friendroids.moneymana.ui.fragment_category.adapter.ManaCategoryAdapter
 import com.friendroids.moneymana.ui.fragment_category.viewmodel.FragmentCategoryViewModel
 import com.friendroids.moneymana.ui.fragment_category.viewmodel.FragmentCategoryViewModelFactory
-import com.friendroids.moneymana.ui.presentation_models.ManaCategory
-import java.util.*
 
 class ManaCategoryFragment : Fragment(R.layout.fragment_mana_category_info) {
 
-    private var listener: ActionCategory? = null
     private val fragmentCategoryViewModel: FragmentCategoryViewModel by viewModels {
         FragmentCategoryViewModelFactory(
             ManaFragmentCategoryRepository(DataBase.getInstance(requireContext().applicationContext))
@@ -43,51 +39,33 @@ class ManaCategoryFragment : Fragment(R.layout.fragment_mana_category_info) {
     }
 
     private fun View.initViews() {
-
         nameCategory = findViewById(R.id.item_category_name_text_view)
         imageCategory = findViewById(R.id.item_category_image_view)
         progressBarCategory = findViewById(R.id.item_category_custom_progress_bar)
         list = findViewById(R.id.mana_category_recycler_view)
-
-//        findViewById<ImageView>(R.id.path).setOnClickListener {
-//            listener?.exitFragment()
-//        }
-//        findViewById<TextView>(R.id.caption_back_text_view).setOnClickListener {
-//            listener?.exitFragment()
-//        }
-
     }
 
     private fun initObserves() {
-        fragmentCategoryViewModel.manaChecks.observe(this.viewLifecycleOwner, this::updCategory)
+        fragmentCategoryViewModel.manaChecks.observe(this.viewLifecycleOwner, this::updCheks)
+        fragmentCategoryViewModel.category.observe(this.viewLifecycleOwner, this::updCategory)
     }
 
     private fun loadData() {
-        val categoryId = requireNotNull(arguments?.getInt(CATEGORY_ID_KEY))
+        val categoryId = requireNotNull(arguments?.getLong(CATEGORY_ID_KEY))
         fragmentCategoryViewModel.updateManaProgress(categoryId)
     }
 
-    private fun updCategory(checksEntity: List<CheckEntity>) {
-
-        nameCategory.text = ""// manaCategory.title
-        imageCategory.setImageResource(R.drawable.food_fork_drink)
-        progressBarCategory.progress = 33
-
+    private fun updCheks(checksEntity: List<CheckEntity>) {
         val adapter = ManaCategoryAdapter(checksEntity)
         list.adapter = adapter
         list.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is ActionCategory) listener = context
-
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
+    fun updCategory(categoryEntity: CategoryEntity) {
+        nameCategory.text = categoryEntity.title
+        imageCategory.setImageResource(categoryEntity.imageId)
+        progressBarCategory.progress = 100 - ((categoryEntity.sumRemained.toFloat() / categoryEntity.sumMaximum.toFloat()) * 100).toInt()
     }
 
     companion object {
@@ -97,10 +75,5 @@ class ManaCategoryFragment : Fragment(R.layout.fragment_mana_category_info) {
                 putLong(CATEGORY_ID_KEY, idCategory)
             }
         }
-    }
-
-    interface ActionCategory {
-        fun exitFragment()
-        fun openDatePickerFragment(nameMovie: String)
     }
 }
