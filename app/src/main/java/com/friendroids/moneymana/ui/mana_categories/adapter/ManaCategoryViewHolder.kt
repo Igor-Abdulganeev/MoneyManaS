@@ -1,5 +1,6 @@
 package com.friendroids.moneymana.ui.mana_categories.adapter
 
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.friendroids.moneymana.R
 import com.friendroids.moneymana.databinding.ItemManaBinding
@@ -28,6 +29,7 @@ class ManaCategoryViewHolder(
 //            )
 
             manaConstraintLayout.setOnClickListener {
+                Log.d("CameraFragment", "Вызов фрагмента с id-$manaCategory")
                 listener.invoke(manaCategory)
             }
         }

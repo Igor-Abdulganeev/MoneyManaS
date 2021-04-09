@@ -1,9 +1,6 @@
 package com.friendroids.moneymana.db.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.friendroids.moneymana.db.models.TotalBudgetEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -45,7 +42,7 @@ interface BudgetDAO {
 */
 
     @Query("SELECT * FROM total_budget WHERE month_budget = :month AND year_budget = :year")
-    fun getTotalBudget(month: Int, year: Int): Flow<TotalBudgetEntity>
+    fun getTotalBudget(month: Int, year: Int): Flow<TotalBudgetEntity>?
 
 /*
     @Query("SELECT * FROM total_budget WHERE MAX(id) LIMIT 1")
@@ -53,5 +50,9 @@ interface BudgetDAO {
 */
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertTotalBudget(totalBudgetEntity: TotalBudgetEntity)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateTotalBudget(totalBudgetEntity: TotalBudgetEntity)
+
 }

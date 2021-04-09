@@ -11,4 +11,5 @@
     <string name="budget_settings">%d ₽\n%d дней</string>
     <string name="check_amount">Сумма чека</string>
     <string name="date">Дата</string>
+    <string name="error_name_category">Категория не найдена</string>
 </resources>

@@ -2,14 +2,15 @@ package com.friendroids.moneymana.ui.fragment_category.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.friendroids.moneymana.data.repository.ManaFragmentCategoryRepository
+import com.friendroids.moneymana.domain.repository.ManaCategoriesRepository
 
-class FragmentCategoryViewModelFactory(private val manaFragmentCategoryRepository: ManaFragmentCategoryRepository) :
+class ManaCategoryViewModelFactory(
+    private val manaCategoriesRepository: ManaCategoriesRepository
+) :
     ViewModelProvider.Factory {
-
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = when (modelClass) {
-        FragmentCategoryViewModel::class.java -> FragmentCategoryViewModel(manaFragmentCategoryRepository)
+        ManaCategoryViewModel::class.java -> ManaCategoryViewModel(manaCategoriesRepository)
         else -> throw IllegalArgumentException("$modelClass is not registered ViewModel")
     } as T
 

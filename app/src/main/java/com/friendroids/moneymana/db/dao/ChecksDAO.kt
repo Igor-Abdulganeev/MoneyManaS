@@ -14,7 +14,7 @@ interface ChecksDAO {
     //ManaRepositoryImpl
 
     @Query("SELECT * FROM checks WHERE id_category == :idCategory ORDER BY id ASC")
-    fun getAllFromCategory(idCategory: Int): Flow<List<CheckEntity>>
+    fun getAllFromCategory(idCategory: Long): Flow<List<CheckEntity>>?
     //ManaFragmentCategoryRepository
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

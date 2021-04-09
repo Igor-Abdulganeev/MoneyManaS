@@ -120,7 +120,7 @@ class CameraFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        navigationActivity?.setImageResource(R.drawable.add_shopping_24)
+        navigationActivity?.setImageResource(R.drawable.add_shopping)
     }
 
     private fun bindCamera() {

@@ -16,4 +16,6 @@
     <color name="indian_green">#0b6e07</color>
     <!-- background -->
     <color name="dark_blue">#222532</color>
+    <!--text-->
+    <color name="white_light">#FFFFF0</color>
 </resources>

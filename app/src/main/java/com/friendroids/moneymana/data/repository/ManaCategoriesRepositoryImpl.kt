@@ -1,6 +1,7 @@
 package com.friendroids.moneymana.data.repository
 
 import android.util.Log
+import androidx.room.withTransaction
 import com.friendroids.moneymana.db.ManaDatabase
 import com.friendroids.moneymana.db.models.CategoryEntity
 import com.friendroids.moneymana.db.models.CheckEntity
@@ -8,6 +9,7 @@ import com.friendroids.moneymana.domain.repository.ManaCategoriesRepository
 import com.friendroids.moneymana.ui.presentation_models.Categories
 import com.friendroids.moneymana.ui.presentation_models.Check
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
+import com.friendroids.moneymana.utils.extensions.DateTimeConverter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -16,12 +18,19 @@ import kotlinx.coroutines.withContext
 
 class ManaCategoriesRepositoryImpl(private val db: ManaDatabase) : ManaCategoriesRepository {
 
-    override fun getManaCategories(): Flow<List<ManaCategory>> =
-        db.categoriesDAO.getAllCategory(true, 4, 2021)
+    override fun getCategoryBudget(idCategory: Long): Flow<List<CheckEntity>>? =
+        db.checksDAO.getAllFromCategory(idCategory)
+
+    override fun loadChecks(idCategory: Long): Flow<List<CheckEntity>>? =
+        db.checksDAO.getAllFromCategory(idCategory)
+
+    override fun getManaCategories(): Flow<List<ManaCategory>> {
+        val period = DateTimeConverter().getPeriod(0)
+        return db.categoriesDAO.getAllCategory(true, period.month, period.year)
             .combine(db.checksDAO.getAllCheck()) { categories: List<Categories>, checks: List<CheckEntity> ->
                 convertListToMana(categories, checks)
             }
-
+    }
 /*
     //для добавления новых категорий
     override suspend fun insertManaCategory(manaCategory: ManaCategory) =
@@ -44,7 +53,18 @@ class ManaCategoriesRepositoryImpl(private val db: ManaDatabase) : ManaCategorie
         }
 
     override suspend fun insertCheck(check: Check) = withContext(Dispatchers.IO) {
-        db.checksDAO.insert(toCheckEntity(check = check))
+        val period = DateTimeConverter().getPeriod(check.dateCheck)
+        db.withTransaction {
+            with(check) {
+                db.checksDAO.insert(toCheckEntity(check = this))
+                db.categoriesDAO.updateCategoryAddCheck(
+                    sumCheck,
+                    category.id,
+                    period.month,
+                    period.year
+                )
+            }
+        }
     }
 
 /*

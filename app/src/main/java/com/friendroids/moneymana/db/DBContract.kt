@@ -8,9 +8,7 @@ object DBContract {
         const val COLUMN_NAME_ID = "id"
         const val COLUMN_NAME_ID_IMAGE = "image_category"
         const val COLUMN_NAME_TITLE = "title_category"
-        const val COLUMN_NAME_SUM_REMAINED = "sum_remained"
         const val COLUMN_NAME_ACTIVE = "active"
-        const val COLUMN_NAME_SUM_MAXIMUM = "sum_maximum"
     }
 
     object Checks {
@@ -40,5 +38,7 @@ object DBContract {
         const val COLUMN_NAME_MONTH = "month_budget"
         const val COLUMN_NAME_YEAR = "year_budget"
         const val COLUMN_NAME_SUM_SPENT = "sum_spent"
+        const val COLUMN_NAME_SUM_REMAINED = "sum_remained"
+        const val COLUMN_NAME_SUM_MAXIMUM = "sum_maximum"
     }
 }

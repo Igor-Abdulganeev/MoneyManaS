@@ -18,8 +18,8 @@ data class CategoryBudgetEntity(
     val year: Int,
     @ColumnInfo(name = DBContract.CategoryBudget.COLUMN_NAME_SUM_SPENT)
     val sumSpent: Double,
-    @ColumnInfo(name = DBContract.CategoriesTable.COLUMN_NAME_SUM_REMAINED)
-    val sumRemained: Int,
-    @ColumnInfo(name = DBContract.CategoriesTable.COLUMN_NAME_SUM_MAXIMUM)
+    @ColumnInfo(name = DBContract.CategoryBudget.COLUMN_NAME_SUM_REMAINED)
+    val sumRemained: Double,
+    @ColumnInfo(name = DBContract.CategoryBudget.COLUMN_NAME_SUM_MAXIMUM)
     val sumMaximum: Int
 )

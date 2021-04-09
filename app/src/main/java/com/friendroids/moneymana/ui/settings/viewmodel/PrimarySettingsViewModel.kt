@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.friendroids.moneymana.db.models.TotalBudgetEntity
 import com.friendroids.moneymana.domain.repository.SettingsRepository
+import com.friendroids.moneymana.utils.extensions.DateTimeConverter
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 class PrimarySettingsViewModel(private val settingsRepository: SettingsRepository) : ViewModel() {
@@ -16,9 +18,11 @@ class PrimarySettingsViewModel(private val settingsRepository: SettingsRepositor
 
     init {
         viewModelScope.launch {
-            settingsRepository.getBudget(4, 2021).collect {
-                _settings.value = it
-            }
+            val period = DateTimeConverter().getPeriod(0)
+            settingsRepository.getBudget(period.month, period.year)?.filterNotNull()
+                ?.collect {
+                    _settings.value = it
+                }
         }
     }
 

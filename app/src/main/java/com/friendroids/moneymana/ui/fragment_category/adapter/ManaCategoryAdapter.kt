@@ -1,37 +1,16 @@
 package com.friendroids.moneymana.ui.fragment_category.adapter
 
-import android.annotation.SuppressLint
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import com.friendroids.moneymana.R
+import androidx.recyclerview.widget.ListAdapter
 import com.friendroids.moneymana.db.models.CheckEntity
 
-class ManaCategoryAdapter(private var checksEntity: List<CheckEntity>) :
-    RecyclerView.Adapter<CheckViewHolder>() {
-
-    private fun getItem(position: Int): CheckEntity = checksEntity[position]
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CheckViewHolder {
-        return CheckViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_check, parent, false)
-        )
+class ManaCategoryAdapter :
+    ListAdapter<CheckEntity, ManaCategoryViewHolder>(ManaCategoryDiffUtils()) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ManaCategoryViewHolder {
+        return ManaCategoryViewHolder.from(parent)
     }
 
-    override fun onBindViewHolder(holder: CheckViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: ManaCategoryViewHolder, position: Int) {
         holder.bind(getItem(position))
-
-    override fun getItemCount(): Int = checksEntity.size
-}
-
-class CheckViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val dateAndSumma: TextView = itemView.findViewById(R.id.item_check_text_view)
-
-    @SuppressLint("SetTextI18n")
-    fun bind(checkEntity: CheckEntity) {
-        dateAndSumma.text = "${checkEntity.dateCheck} - ${checkEntity.sumCheck}"
     }
-
 }

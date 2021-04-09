@@ -1,6 +1,7 @@
 package com.friendroids.moneymana.ui.settings
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.friendroids.moneymana.db.ManaDatabase
 import com.friendroids.moneymana.db.models.TotalBudgetEntity
 import com.friendroids.moneymana.ui.settings.viewmodel.PrimarySettingsViewModel
 import com.friendroids.moneymana.ui.settings.viewmodel.PrimarySettingsViewModelFactory
+import com.friendroids.moneymana.utils.extensions.DateTimeConverter
 import com.friendroids.moneymana.utils.extensions.changeColor
 
 class PrimarySettingsDialog : DialogFragment() {
@@ -26,6 +28,9 @@ class PrimarySettingsDialog : DialogFragment() {
             SettingsRepositoryImpl(ManaDatabase.getInstance(requireContext().applicationContext))
         )
     }
+    private var idCategory: Long? = 0L
+    private var idMonth: Int = 0
+    private var idYear: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,12 +50,14 @@ class PrimarySettingsDialog : DialogFragment() {
         initViews()
         viewModel.settings.observe(viewLifecycleOwner, {
             if (it != null) {
+                idCategory = it.id
+                idMonth = it.month
+                idYear = it.year
                 if (it.sumBudget != 0) {
                     binding.totalAmountEditText.setText(it.sumBudget.toString())
                 }
                 binding.revertPeriodEditText.setText(it.dayRestart.toString())
             }
-
         })
     }
 
@@ -78,8 +85,8 @@ class PrimarySettingsDialog : DialogFragment() {
                         && revertPeriodEditText.text.toString().toInt() > 0
                         && revertPeriodEditText.text.toString().toInt() < 32
             if (saveSettingsButton.isEnabled) saveSettingsButton.changeColor(
-                    requireContext(),
-                    R.color.primaryColor
+                requireContext(),
+                R.color.primaryColor
             )
             else saveSettingsButton.changeColor(requireContext(), R.color.light_grey)
         }
@@ -89,13 +96,18 @@ class PrimarySettingsDialog : DialogFragment() {
         viewModel.updateSettings(settings)
     }
 
-    private fun changePrimarySettings() = TotalBudgetEntity(
-        id = null,
-        month = 4,
-        year = 2021,
-        dayRestart = binding.revertPeriodEditText.text.toString().toInt(),
-        sumBudget = binding.totalAmountEditText.text.toString().toInt()
-    )
+    private fun changePrimarySettings(): TotalBudgetEntity {
+        val period = DateTimeConverter().getPeriod(0)
+        Log.d("CameraFragment", " new period ${period.month} - $idMonth")
+
+        return TotalBudgetEntity(
+            id = if (period.month == idMonth && period.year == idYear) idCategory else null,
+            month = period.month,
+            year = period.year,
+            dayRestart = binding.revertPeriodEditText.text.toString().toInt(),
+            sumBudget = binding.totalAmountEditText.text.toString().toInt()
+        )
+    }
 
     companion object {
         const val PRIMARY_SETTINGS_DIALOG = "PRIMARY_SETTINGS_DIALOG"

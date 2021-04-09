@@ -39,6 +39,11 @@ interface CategoriesDAO {
     fun insertCategoryBudgetsList(categoryBudgetEntityList: List<CategoryBudgetEntity>)
     //ManaDatabase
 
+    @Query("UPDATE category_budget SET sum_maximum = :sumMaximum, sum_remained = :sumMaximum - sum_spent WHERE month_budget=:month AND year_budget=:year")
+    fun updateCategories(sumMaximum: Int, month: Int, year: Int)
+
+    @Query("UPDATE category_budget SET sum_spent = sum_spent + :sumCheck, sum_remained = sum_remained - :sumCheck WHERE id_category=:idCategory AND month_budget=:month AND year_budget=:year")
+    fun updateCategoryAddCheck(sumCheck: Double, idCategory: Long?, month: Int, year: Int)
 /*
     @Query("DELETE FROM categories WHERE id == :id")
     suspend fun deleteById(id: Long)

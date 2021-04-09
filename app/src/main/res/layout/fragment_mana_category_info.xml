@@ -97,7 +97,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mana_category_recycler_view"
+        android:id="@+id/checks_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"

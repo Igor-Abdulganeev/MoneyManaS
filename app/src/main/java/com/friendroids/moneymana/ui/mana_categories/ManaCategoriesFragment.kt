@@ -58,9 +58,9 @@ class ManaCategoriesFragment : Fragment() {
         navigationActivity?.setImageResource(R.drawable.ic_scanner)
     }
 
-    override fun onDestroyView() {
+    override fun onDestroy() {
         _binding = null
-        super.onDestroyView()
+        super.onDestroy()
     }
 
     private fun initObservers() {
@@ -72,12 +72,10 @@ class ManaCategoriesFragment : Fragment() {
 
     private fun initViews() {
         manaCategoriesAdapter = ManaCategoriesAdapter {
-            if (it.id!= null) {
-                navigationActivity?.openCategoryFragment(it.id)
-            }
+            navigationActivity?.openCategoryFragment(it.id, it.imageId, it.title)
         }
-        binding.manaRecyclerView.adapter = manaCategoriesAdapter
         with(binding) {
+            manaRecyclerView.adapter = manaCategoriesAdapter
 /*
             addCategoryButton.setOnClickListener {
                 val dialog = AddCategoryDialog()

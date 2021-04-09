@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), NavigationActivity {
                 Log.d(TAG, "$TAG - что то пошло не так с фрагментами")
             }
         }
-        binding.cameraButton.setImageResource(R.drawable.add_shopping_24)
+        binding.cameraButton.setImageResource(R.drawable.add_shopping)
     }
 
     override fun onResume() {
@@ -64,11 +64,15 @@ class MainActivity : AppCompatActivity(), NavigationActivity {
         binding.cameraButton.setImageResource(resId)
     }
 
-    override fun openCategoryFragment(idCategory: Long) {
+    override fun openCategoryFragment(idCategory: Long, imageCategory: Int, nameCategory: String) {
         supportFragmentManager.beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.container, ManaCategoryFragment.newInstance(idCategory), MAIN_FRAGMENT)
-                .commit()
+            .addToBackStack(null)
+            .replace(
+                R.id.container,
+                ManaCategoryFragment.newInstance(idCategory, imageCategory, nameCategory),
+                MAIN_FRAGMENT
+            )
+            .commit()
     }
 
     override fun onRequestPermissionsResult(

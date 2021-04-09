@@ -61,17 +61,17 @@ abstract class ManaDatabase : RoomDatabase() {
             CategoryEntity(5, R.drawable.gas_station, "Бензин", true),
             CategoryEntity(6, R.drawable.ambulance, "Здоровье", true),
             CategoryEntity(7, R.drawable.hiking, "Путешествия", true),
-            CategoryEntity(8, R.drawable.baseball_bat, "Спорт", true)
+            CategoryEntity(8, R.drawable.weight_lifter, "Спорт", true)
         )
         private val categoriesBudgetExample = listOf(
-            CategoryBudgetEntity(1, 1, 4, 2021, 0.00, 0, 0),
-            CategoryBudgetEntity(2, 2, 4, 2021, 0.00, 0, 0),
-            CategoryBudgetEntity(3, 3, 4, 2021, 0.00, 0, 0),
-            CategoryBudgetEntity(4, 4, 4, 2021, 0.00, 0, 0),
-            CategoryBudgetEntity(5, 5, 4, 2021, 0.00, 0, 0),
-            CategoryBudgetEntity(6, 6, 4, 2021, 0.00, 0, 0),
-            CategoryBudgetEntity(7, 7, 4, 2021, 0.00, 0, 0),
-            CategoryBudgetEntity(8, 8, 4, 2021, 0.00, 0, 0)
+            CategoryBudgetEntity(1, 1, 4, 2021, 0.00, 0.00, 0),
+            CategoryBudgetEntity(2, 2, 4, 2021, 0.00, 0.00, 0),
+            CategoryBudgetEntity(3, 3, 4, 2021, 0.00, 0.00, 0),
+            CategoryBudgetEntity(4, 4, 4, 2021, 0.00, 0.00, 0),
+            CategoryBudgetEntity(5, 5, 4, 2021, 0.00, 0.00, 0),
+            CategoryBudgetEntity(6, 6, 4, 2021, 0.00, 0.00, 0),
+            CategoryBudgetEntity(7, 7, 4, 2021, 0.00, 0.00, 0),
+            CategoryBudgetEntity(8, 8, 4, 2021, 0.00, 0.00, 0)
         )
 
 /*

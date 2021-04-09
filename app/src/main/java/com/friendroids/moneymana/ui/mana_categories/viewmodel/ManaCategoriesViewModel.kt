@@ -9,6 +9,7 @@ import com.friendroids.moneymana.db.models.TotalBudgetEntity
 import com.friendroids.moneymana.domain.repository.ManaCategoriesRepository
 import com.friendroids.moneymana.domain.repository.SettingsRepository
 import com.friendroids.moneymana.ui.presentation_models.ManaCategory
+import com.friendroids.moneymana.utils.extensions.DateTimeConverter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
@@ -44,11 +45,11 @@ class ManaCategoriesViewModel(
                         _manaCategories.value = it
                     }
             }
-            settingsRepository.getBudget(4, 2021)
+            val period = DateTimeConverter().getPeriod(0)
+            settingsRepository.getBudget(period.month, period.year)?.filterNotNull()
                 // manaRepository.getPrimaryBudgetSettings()
-                .filterNotNull()
-                .collect {
-                    Log.d("getUserManaState", "$it")
+                ?.collect {
+                    Log.d("CameraFragment", "settingsRepository.getBudget $it")
                     _primarySettings.value = it
                 }
         }
