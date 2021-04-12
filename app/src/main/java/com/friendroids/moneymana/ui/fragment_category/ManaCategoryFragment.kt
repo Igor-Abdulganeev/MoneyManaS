@@ -14,6 +14,7 @@ import com.friendroids.moneymana.data.repository.ManaFragmentCategoryRepository
 import com.friendroids.moneymana.db.DataBase
 import com.friendroids.moneymana.db.models.CategoryEntity
 import com.friendroids.moneymana.db.models.CheckEntity
+import com.friendroids.moneymana.ui.fragment_category.adapter.ActionChecks
 import com.friendroids.moneymana.ui.fragment_category.adapter.ManaCategoryAdapter
 import com.friendroids.moneymana.ui.fragment_category.viewmodel.FragmentCategoryViewModel
 import com.friendroids.moneymana.ui.fragment_category.viewmodel.FragmentCategoryViewModelFactory
@@ -46,8 +47,8 @@ class ManaCategoryFragment : Fragment(R.layout.fragment_mana_category_info) {
     }
 
     private fun initObserves() {
-        fragmentCategoryViewModel.manaChecks.observe(this.viewLifecycleOwner, this::updCheks)
-        fragmentCategoryViewModel.category.observe(this.viewLifecycleOwner, this::updCategory)
+        fragmentCategoryViewModel.manaChecks.observe(this.viewLifecycleOwner, this::updateChecks)
+        fragmentCategoryViewModel.category.observe(this.viewLifecycleOwner, this::updateCategory)
     }
 
     private fun loadData() {
@@ -55,17 +56,24 @@ class ManaCategoryFragment : Fragment(R.layout.fragment_mana_category_info) {
         fragmentCategoryViewModel.updateManaProgress(categoryId)
     }
 
-    private fun updCheks(checksEntity: List<CheckEntity>) {
-        val adapter = ManaCategoryAdapter(checksEntity)
+    private fun updateChecks(checksEntity: List<CheckEntity>) {
+        val adapter = ManaCategoryAdapter(checksEntity, clickListener)
         list.adapter = adapter
         list.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
-    fun updCategory(categoryEntity: CategoryEntity) {
+    private fun updateCategory(categoryEntity: CategoryEntity) {
         nameCategory.text = categoryEntity.title
         imageCategory.setImageResource(categoryEntity.imageId)
-        progressBarCategory.progress = 100 - ((categoryEntity.sumRemained.toFloat() / categoryEntity.sumMaximum.toFloat()) * 100).toInt()
+        progressBarCategory.progress =
+            100 - ((categoryEntity.sumRemained.toFloat() / categoryEntity.sumMaximum.toFloat()) * 100).toInt()
+    }
+
+    private val clickListener = object : ActionChecks {
+        override fun onRemove(idCheck: Long?) {
+            fragmentCategoryViewModel.removeCheck(idCheck!!)
+        }
     }
 
     companion object {

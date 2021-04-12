@@ -20,8 +20,19 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/item_check_image_view"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/item_check_image_remove"
         app:layout_constraintStart_toEndOf="@+id/item_check_image_view"
         app:layout_constraintTop_toTopOf="@+id/item_check_image_view"
         tools:text="TextView" />
+
+    <ImageView
+        android:id="@+id/item_check_image_remove"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/trash_can_outline"
+        tools:ignore="ContentDescription" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

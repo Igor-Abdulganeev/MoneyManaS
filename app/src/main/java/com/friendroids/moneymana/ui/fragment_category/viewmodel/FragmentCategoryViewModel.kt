@@ -34,4 +34,9 @@ class FragmentCategoryViewModel(private val manaFragmentCategoryRepository: Mana
 
     }
 
+    fun removeCheck(idCheck: Long) {
+        viewModelScope.launch {
+            manaFragmentCategoryRepository.onRemoveCheck(idCheck)
+        }
+    }
 }

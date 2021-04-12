@@ -46,6 +46,7 @@
         app:layout_constraintEnd_toStartOf="@+id/right_guideline"
         app:layout_constraintTop_toTopOf="@+id/top_guideline"
         app:srcCompat="@drawable/image_plus"
+        android:visibility="gone"
         tools:ignore="ContentDescription" />
 
     <TextView
