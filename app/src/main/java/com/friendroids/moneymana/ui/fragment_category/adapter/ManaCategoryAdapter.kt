@@ -3,12 +3,13 @@ package com.friendroids.moneymana.ui.fragment_category.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.friendroids.moneymana.R
 import com.friendroids.moneymana.db.models.CheckEntity
 
-class ManaCategoryAdapter(private var checksEntity: List<CheckEntity>) :
+class ManaCategoryAdapter(private var checksEntity: List<CheckEntity>, private val clickListener: ActionChecks) :
     RecyclerView.Adapter<CheckViewHolder>() {
 
     private fun getItem(position: Int): CheckEntity = checksEntity[position]
@@ -20,16 +21,23 @@ class ManaCategoryAdapter(private var checksEntity: List<CheckEntity>) :
     }
 
     override fun onBindViewHolder(holder: CheckViewHolder, position: Int) =
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), clickListener)
 
     override fun getItemCount(): Int = checksEntity.size
 }
 
 class CheckViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val dateAndSumma: TextView = itemView.findViewById(R.id.item_check_text_view)
+    private val dateAndSum: TextView = itemView.findViewById(R.id.item_check_text_view)
+    private val imageRemove: ImageView = itemView.findViewById(R.id.item_check_image_remove)
 
-    fun bind(checkEntity: CheckEntity) {
-        dateAndSumma.text = "${checkEntity.dateCheck} - ${checkEntity.sumCheck}"
+    fun bind(checkEntity: CheckEntity, clickListener: ActionChecks) {
+        dateAndSum.text = "${checkEntity.dateCheck} - ${checkEntity.sumCheck}"
+        imageRemove.setOnClickListener {
+            clickListener.onRemove(checkEntity.id)
+        }
     }
+}
 
+interface ActionChecks {
+    fun onRemove(id: Long?)
 }

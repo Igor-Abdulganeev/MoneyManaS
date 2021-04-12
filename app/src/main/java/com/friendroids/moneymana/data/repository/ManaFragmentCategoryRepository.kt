@@ -11,4 +11,8 @@ class ManaFragmentCategoryRepository(private val db: DataBase) {
 
     fun getCategory(idCategory: Long): Flow<CategoryEntity> = db.categoriesDAO.getCategoriesById(idCategory)
 
+    suspend fun onRemoveCheck(idCheck: Long) {
+        db.checksDAO.deleteById(idCheck)
+    }
+
 }
